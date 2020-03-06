@@ -765,9 +765,14 @@ a.primary-btn:hover{
  * ----------------------------
  */
 
+footer ul li copyright{
+    color:#fff
+}
+
 footer ul li a{
     color:#fff
 }
+
 footer{
     background:#232324;
     z-index:1;
