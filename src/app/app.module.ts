@@ -8,6 +8,8 @@ import { TabbedMenuComponent } from './components/tabbed-menu/tabbed-menu.compon
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { AskOracleComponent } from './components/ask-oracle/ask-oracle.component';
 import { AskOracleFormComponent } from './components/ask-oracle-form/ask-oracle-form.component';
+import { TopFoodsCountComponent } from './components/top-foods-count/top-foods-count.component';
+import { TopFoodsResultAreaComponent } from './components/top-foods-result-area/top-foods-result-area.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { AskOracleFormComponent } from './components/ask-oracle-form/ask-oracle-
     TabbedMenuComponent,
     SideMenuComponent,
     AskOracleComponent,
-    AskOracleFormComponent
+    AskOracleFormComponent,
+    TopFoodsCountComponent,
+    TopFoodsResultAreaComponent
   ],
   imports: [
     BrowserModule,
