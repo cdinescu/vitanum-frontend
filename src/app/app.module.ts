@@ -7,6 +7,8 @@ import { DiaryComponent } from './components/diary/diary.component';
 import { TabbedMenuComponent } from './components/tabbed-menu/tabbed-menu.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { AskOracleComponent } from './components/ask-oracle/ask-oracle.component';
+import { AskOracleFormComponent } from './components/ask-oracle-form/ask-oracle-form.component';
+
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { AskOracleComponent } from './components/ask-oracle/ask-oracle.component
     DiaryComponent,
     TabbedMenuComponent,
     SideMenuComponent,
-    AskOracleComponent
+    AskOracleComponent,
+    AskOracleFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
