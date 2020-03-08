@@ -29,14 +29,13 @@ export class DiaryComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-        id: 1,
         title: 'Add Food to Diary'
     };
 
     const dialogRef = this.dialog.open(AddFoodDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      alert("response: " + result)
+      // alert("response: " + result)
     });
   }
   
