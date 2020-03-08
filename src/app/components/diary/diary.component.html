@@ -8,17 +8,14 @@
       </tr>
     </thead>
     <tbody>
-        <tr>
-          <th scope="row">Tomato, raw</th>
-          <td>150</td>
-          <td>g</td>
-          <td>90</td>
+      <!-- loop over the collection of diary entries -->
+        <tr *ngFor="let tempDiaryEntry of diaryEntries">
+          <th scope="row">{{ tempDiaryEntry.description }}</th>
+          <td>{{ tempDiaryEntry.amount }}</td>
+          <td>{{ tempDiaryEntry.unit }}</td>
+          <td>{{ tempDiaryEntry.calories }}</td>
         </tr>
-        <tr>
-          <th scope="row">Cheese</th>
-          <td>50</td>
-          <td>g</td>
-          <td>120</td>
-        </tr>
-      </tbody>
+
+    </tbody>
 </table>
+
