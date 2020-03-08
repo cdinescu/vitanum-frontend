@@ -1,81 +1,48 @@
-<!doctype html>
-<html lang="en">
+<div class="page-wrapper">
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<title>luv2shop - Full Stack eCommerce: Angular and Spring Boot</title>
-
-	<!-- Bootstrap CSS and Font Awesome -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" media="all">
-
-	<!-- Main CSS-->
-
-	<link rel="icon" href="assets/images/fav-icon.png">
-</head>
-
-<body>
-	<div class="page-wrapper">
-
-		<!-- MENU SIDEBAR-->
-		<aside class="menu-sidebar d-none d-lg-block">
-			<div class="logo">
-				<a href="home.html">
-					<img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
-				</a>
-			</div>
-			<div class="menu-sidebar-content js-scrollbar1">
-				<nav class="navbar-sidebar">
-					<app-side-menu></app-side-menu>
-				</nav>
-			</div>
-		</aside>
-		<!-- END MENU SIDEBAR-->
-
-		<!-- PAGE CONTAINER-->
-		<div class="page-container">
-			<!-- HEADER DESKTOP-->
-			<header class="header-desktop">
-				<div class="section-content section-content-p30">
-					<div class="container-fluid">
-						<div class="header-wrap">
-                          <app-tabbed-menu></app-tabbed-menu>
-						</div>
-					</div>
-				</div>
-			</header>
-			<!-- END HEADER DESKTOP-->
-
-			<!-- MAIN CONTENT-->
-			<div class="main-content">
-				<div class="section-content section-content-p30">
-					<div class="container-fluid">
-					  <!--
-					  <app-top-foods-result-area></app-top-foods-result-area>
-					  -->
-					  <app-diary></app-diary>
-					</div>
-				</div>
-			</div>
-
-		  <!-- END MAIN CONTENT-->
+    <!-- MENU SIDEBAR-->
+	<aside class="menu-sidebar d-none d-lg-block">
+		<div class="logo">
+			<a routerLink="/diaries" class="nav-link" routeLinkActive="active-link">
+				<img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
+			</a>
 		</div>
+		<router-outlet name='sidebar'></router-outlet>
+	</aside>
+	<!-- END MENU SIDEBAR-->
+
+	<!-- PAGE CONTAINER-->
+	<div class="page-container">
+		<!-- HEADER DESKTOP-->
+		<header class="header-desktop">
+			<div class="section-content section-content-p30">
+				<div class="container-fluid">
+					<div class="header-wrap">
+                        <app-tabbed-menu></app-tabbed-menu>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- END HEADER DESKTOP-->
+
+		<!-- MAIN CONTENT-->
+		<div class="main-content">
+			<div class="section-content section-content-p30">
+				<div class="container-fluid">
+					<router-outlet></router-outlet>
+				</div>
+			</div>
+		</div>
+
+		<!-- END MAIN CONTENT-->
 	</div>
+</div>
 
-	<!-- END PAGE CONTAINER-->
+<!-- END PAGE CONTAINER-->
+	
+<footer>
+	<ul>
+		<li><a href="#">Vitanum</a></li>
+	</ul>
+</footer>
 
-
-	<footer>
-		<ul>
-			<li><a href="#">Vitanum</a></li>
-		</ul>
-	</footer>
-
-</body>
-
-</html>
-<!-- end document-->

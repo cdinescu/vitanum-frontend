@@ -11,7 +11,15 @@ import { AskOracleFormComponent } from './components/ask-oracle-form/ask-oracle-
 import { TopFoodsCountComponent } from './components/top-foods-count/top-foods-count.component';
 import { TopFoodsResultAreaComponent } from './components/top-foods-result-area/top-foods-result-area.component';
 import {DiaryServiceService} from '../app/services/diary-service.service'
+import { Routes, RouterModule } from '@angular/router';
 
+const routes: Routes = [
+  {path: 'diaries/:id', component: DiaryComponent},
+  { path: 'ask-the-oracle', component: TopFoodsResultAreaComponent },
+  {path: 'diaries', component: DiaryComponent},
+  {path: '', redirectTo: '/diaries', pathMatch: 'full'},
+  {path: '**',  redirectTo: '/diaries', pathMatch: 'full'},
+];
 
 @NgModule({
   declarations: [
@@ -25,6 +33,7 @@ import {DiaryServiceService} from '../app/services/diary-service.service'
     TopFoodsResultAreaComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
 
