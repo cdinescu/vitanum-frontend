@@ -10,12 +10,16 @@ import { AskOracleComponent } from './components/ask-oracle/ask-oracle.component
 import { AskOracleFormComponent } from './components/ask-oracle-form/ask-oracle-form.component';
 import { TopFoodsCountComponent } from './components/top-foods-count/top-foods-count.component';
 import { TopFoodsResultAreaComponent } from './components/top-foods-result-area/top-foods-result-area.component';
-import {DiaryServiceService} from '../app/services/diary-service.service'
+import { DiaryServiceService } from '../app/services/diary-service.service'
 import { Routes, RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddFoodDialogComponent } from './components/add-food-dialog/add-food-dialog.component';
+import { MatIconModule } from "@angular/material/icon";
 
 const routes: Routes = [
   {path: 'diaries/:id', component: DiaryComponent},
-  { path: 'ask-the-oracle', component: TopFoodsResultAreaComponent },
+  {path: 'ask-the-oracle', component: TopFoodsResultAreaComponent },
   {path: 'diaries', component: DiaryComponent},
   {path: '', redirectTo: '/diaries', pathMatch: 'full'},
   {path: '**',  redirectTo: '/diaries', pathMatch: 'full'},
@@ -30,13 +34,16 @@ const routes: Routes = [
     AskOracleComponent,
     AskOracleFormComponent,
     TopFoodsCountComponent,
-    TopFoodsResultAreaComponent
+    TopFoodsResultAreaComponent,
+    AddFoodDialogComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
-
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatIconModule
   ],
   providers: [DiaryServiceService],
   bootstrap: [AppComponent]
