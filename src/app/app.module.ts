@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddFoodDialogComponent } from './components/add-food-dialog/add-food-dialog.component';
 import { MatIconModule } from "@angular/material/icon";
+import { MaterialModule } from './material.module';
 
 const routes: Routes = [
   {path: 'diaries/:id', component: DiaryComponent},
@@ -41,7 +42,8 @@ const routes: Routes = [
     AppRoutingModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MaterialModule
   ],
   providers: [DiaryServiceService],
   bootstrap: [AppComponent]

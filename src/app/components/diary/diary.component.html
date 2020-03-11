@@ -1,3 +1,19 @@
+<aside class="menu-sidebar d-none d-lg-block">
+  <div class="logo">
+      <a routerLink="/diaries" class="nav-link" routeLinkActive="active-link">
+          <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
+      </a>
+  </div>
+  <br>
+  <div>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+</aside>
+
 <button type="button" class="btn btn-light" (click)="openDialog()">ADD FOOD</button>
 
 <hr>
