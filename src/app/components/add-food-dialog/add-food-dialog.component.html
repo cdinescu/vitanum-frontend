@@ -1,4 +1,6 @@
-<h3 mat-dialog-title>{{modalTitle}}</h3>
+<button class="close" mat-button [mat-dialog-close]="true">X</button>
+
+<h4>{{modalTitle}}</h4>
 <hr>
 
 <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan active-cyan-2 mt-2">
@@ -7,8 +9,13 @@
       aria-label="Search">
 </form>
 
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button mat-button [mat-dialog-close]="true">Yes</button>
-</mat-dialog-actions>
+<hr>
+<table class="table table-striped">
+    <thead class="text-light bg-secondary">
+      <tr>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

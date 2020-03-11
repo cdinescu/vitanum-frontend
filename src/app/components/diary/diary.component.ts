@@ -26,6 +26,10 @@ export class DiaryComponent implements OnInit {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.height = "50%";
+    dialogConfig.width = "50%";
+    dialogConfig.panelClass = "add-food-dialog";
+
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {

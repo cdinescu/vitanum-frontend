@@ -10,3 +10,19 @@
 .active-cyan .fa, .active-cyan-2 .fa {
     color: #4dd0e1;
 }
+
+.cdk-overlay-pane.add-food-dialog {
+    position: relative!important;
+  }
+  .close.mat-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    line-height: 14px;
+    min-width: auto;
+  }
+
+  .close {
+    outline:0
+  }
