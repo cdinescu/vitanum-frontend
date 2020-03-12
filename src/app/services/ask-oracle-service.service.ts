@@ -6,4 +6,10 @@ import { Injectable } from '@angular/core';
 export class AskOracleServiceService {
 
   constructor() { }
+
+  getFoodNames(): string[] {
+    let foodNames = ["Potassium", "Calcium", "Magnesium"];
+
+    return foodNames;
+  }
 }

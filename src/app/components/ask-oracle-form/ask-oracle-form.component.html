@@ -1,11 +1,20 @@
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Potassium
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Potassium</a>
-      <a class="dropdown-item" href="#">Sodium</a>
-      <a class="dropdown-item" href="#">Vitamin E</a>
-    </div>
+<div>
+  <label>Search nutrient</label>
+  <br>
+  <select [(ngModel)]="selectedFoodName">
+    <option *ngFor="let foodName of foodNames" [ngValue]="foodName" >{{foodName}}</option>
+  </select>
 </div>
+<p>
+
+<div>
+  <label>Find the top</label>
+  <br>
+  <select [(ngModel)]="selectedFoodCount">
+    <option *ngFor="let foodCount of topFoodCountOptions" [ngValue]="foodCount" >{{foodCount}}</option>
+  </select>
+</div>
+
+<br>
+<button type="button" class="btn btn-info">Submit</button>
 

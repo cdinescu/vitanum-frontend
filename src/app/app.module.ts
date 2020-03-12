@@ -7,7 +7,6 @@ import { DiaryComponent } from './components/diary/diary.component';
 import { TabbedMenuComponent } from './components/tabbed-menu/tabbed-menu.component';
 import { AskOracleComponent } from './components/ask-oracle/ask-oracle.component';
 import { AskOracleFormComponent } from './components/ask-oracle-form/ask-oracle-form.component';
-import { TopFoodsCountComponent } from './components/top-foods-count/top-foods-count.component';
 import { TopFoodsResultAreaComponent } from './components/top-foods-result-area/top-foods-result-area.component';
 import { DiaryServiceService } from '../app/services/diary-service.service'
 import { Routes, RouterModule } from '@angular/router';
@@ -16,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddFoodDialogComponent } from './components/add-food-dialog/add-food-dialog.component';
 import { MatIconModule } from "@angular/material/icon";
 import { MaterialModule } from './material.module';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: 'diaries/:id', component: DiaryComponent},
@@ -32,7 +32,6 @@ const routes: Routes = [
     TabbedMenuComponent,
     AskOracleComponent,
     AskOracleFormComponent,
-    TopFoodsCountComponent,
     TopFoodsResultAreaComponent,
     AddFoodDialogComponent
   ],
@@ -43,7 +42,8 @@ const routes: Routes = [
     MatDialogModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [DiaryServiceService],
   bootstrap: [AppComponent]
