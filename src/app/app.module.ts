@@ -47,7 +47,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [DiaryServiceService],
+  providers: [DiaryServiceService, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

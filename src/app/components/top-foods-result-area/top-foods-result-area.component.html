@@ -10,20 +10,22 @@
 </aside>
 
 
-    <table class="table table-striped">
-        <thead class="text-light bg-secondary">
-            <tr>
-              <th scope="col">Description</th>
-              <th scope="col">Measure</th>
-              <th scope="col">Quantity</th>
-            </tr>
-        </thead>
+<table class="table table-striped">
+    <thead class="text-light bg-secondary">
+        <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Measure</th>
+            <th scope="col">Quantity</th>
+         </tr>
+    </thead>
         
+    <tbody>
         <tr *ngFor="let food of topFoods">
             <td>{{ food.description }}</td>
             <td>{{ food.measure }}</td>
             <td>{{ food.quantity }}</td>
-       </tr>
-    </table>
+        </tr>
+    </tbody>
+</table>
 
 
