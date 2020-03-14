@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AskOracleServiceService } from 'src/app/services/ask-oracle-service.service';
+import { AskOracleSharedDataService } from 'src/app/services/ask-oracle-shared-data.service';
+import { AskOracleQuery } from 'src/app/common/ask-oracle-query';
 
 
 @Component({
@@ -15,7 +17,7 @@ export class AskOracleFormComponent implements OnInit {
   foodNames: string[]; // take from service
   selectedFoodName: string;
 
-  constructor(private askOracleServiceService: AskOracleServiceService) { }
+  constructor(private askOracleServiceService: AskOracleServiceService, private askOracleSharedDataService: AskOracleSharedDataService) { }
 
   ngOnInit(): void {
     this.populateFoodNames();
@@ -27,6 +29,15 @@ export class AskOracleFormComponent implements OnInit {
 
   populateFoodNames() {
     this.foodNames = this.askOracleServiceService.getFoodNames();
+  }
+
+  onSubmitClick() {
+    console.log('selected food: ' + this.selectedFoodName + ' selected food count: ' + this.selectedFoodCount);
+    const askOracleQuery = new AskOracleQuery();
+    askOracleQuery.nutrientName = 'iron';
+    askOracleQuery.maxResult = this.selectedFoodCount;
+
+    this.askOracleSharedDataService.nextQuery(askOracleQuery);
   }
 
 }

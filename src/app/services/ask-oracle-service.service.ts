@@ -8,32 +8,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AskOracleServiceService {
-  private baseUrl = 'http://192.168.0.144:8082/top-richest-foods/iron';
+  private baseUrl = 'http://192.168.0.144:8082/top-richest-foods';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getFoodNames(): string[] {
     return ['Potassium', 'Calcium', 'Magnesium'];
   }
 
-  testConnection(): Observable<HttpResponse<Food[]>> {
-    console.log('AskOracleServiceService >>> ');
-    this.httpClient.get<GetResponseFood>(this.baseUrl).subscribe(data => {
-      // console.log(data);
-    });
+  sendRequest(foodName: string, foodCount: number): Observable<HttpResponse<Food[]>> {
+    const requestUrl = `${this.baseUrl}/${foodName}?maxRecordCount=${foodCount}`;
 
-    this.httpClient.get(this.baseUrl, { observe: 'response' }).subscribe(data => {
-      console.log('response: ' + data);
-    });
-
-    // return this.httpClient.get<Food[]>(this.baseUrl);
-    return this.httpClient.get<Food[]>(
-      this.baseUrl, { observe: 'response' });
+    return this.httpClient.get<Food[]>(requestUrl, { observe: 'response' });
   }
 }
 
-interface GetResponseFood {
-    // __proto__ : {
-    foods: Food[];
-    // }
-}

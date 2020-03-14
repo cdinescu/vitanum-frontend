@@ -17,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AskOracleSharedDataService } from '../app/services/ask-oracle-shared-data.service';
+
 
 const routes: Routes = [
   {path: 'diaries/:id', component: DiaryComponent},
@@ -47,7 +49,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [DiaryServiceService, HttpClientModule],
+  providers: [DiaryServiceService, HttpClientModule, AskOracleSharedDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

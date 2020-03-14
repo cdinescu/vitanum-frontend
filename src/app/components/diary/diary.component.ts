@@ -39,7 +39,6 @@ export class DiaryComponent implements OnInit {
     const dialogRef = this.dialog.open(AddFoodDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // alert("response: " + result)
     });
   }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AskOracleServiceService } from 'src/app/services/ask-oracle-service.service';
-import { HttpClient } from '@angular/common/http';
 import { Food } from 'src/app/common/food';
+import { AskOracleSharedDataService } from 'src/app/services/ask-oracle-shared-data.service';
+import { AskOracleQuery } from 'src/app/common/ask-oracle-query';
 
 @Component({
   selector: 'app-top-foods-result-area',
@@ -9,18 +10,24 @@ import { Food } from 'src/app/common/food';
   styleUrls: ['./top-foods-result-area.component.css']
 })
 export class TopFoodsResultAreaComponent implements OnInit {
+  askOracleQuery: AskOracleQuery;
+
   topFoods: Food[] = [];
 
-  constructor(private askOracleServiceService: AskOracleServiceService) { }
+  constructor(private askOracleServiceService: AskOracleServiceService, private askOracleSharedDataService: AskOracleSharedDataService) {}
 
   ngOnInit(): void {
-    this.sendRequest();
+    this.askOracleSharedDataService.sharedQuery.subscribe(query => {
+      this.askOracleQuery = query;
+      console.log(' ======================= ' + this.askOracleQuery.nutrientName + ' ' + this.askOracleQuery.maxResult);
+      this.sendRequest(this.askOracleQuery);
+    });
   }
 
-  sendRequest() {
-    this.askOracleServiceService.testConnection().subscribe(response => {
+  sendRequest(askOracleQuery: AskOracleQuery) {
+    this.askOracleServiceService.sendRequest('iron', askOracleQuery.maxResult).subscribe(response => {
+      this.topFoods = [];
       for (const data of response.body) {
-        console.log('data--- ' + data.description + ' ' + data.measure + ' ' + data.quantity);
         this.topFoods.push(data);
       }
     });
