@@ -23,4 +23,5 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [ MatDatepickerModule ],
 })
 
-export class MaterialModule {}
+export class MaterialModule {
+}

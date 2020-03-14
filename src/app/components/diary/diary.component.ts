@@ -12,7 +12,7 @@ import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.compo
 export class DiaryComponent implements OnInit {
   diaryEntries: DiaryEntry[];
 
-  constructor(private diaryService: DiaryServiceService, private dialog: MatDialog) { 
+  constructor(private diaryService: DiaryServiceService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -26,9 +26,9 @@ export class DiaryComponent implements OnInit {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.height = "50%";
-    dialogConfig.width = "50%";
-    dialogConfig.panelClass = "add-food-dialog";
+    dialogConfig.height = '50%';
+    dialogConfig.width = '50%';
+    dialogConfig.panelClass = 'add-food-dialog';
 
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -42,6 +42,4 @@ export class DiaryComponent implements OnInit {
       // alert("response: " + result)
     });
   }
-  
-
 }

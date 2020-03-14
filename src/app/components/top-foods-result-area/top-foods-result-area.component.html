@@ -9,7 +9,21 @@
     </div>
 </aside>
 
-<div class="container">
-    <textarea readonly class="text" rows="50" placeholder="Get started with an Oracle search!"></textarea>
-</div>
+
+    <table class="table table-striped">
+        <thead class="text-light bg-secondary">
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Measure</th>
+              <th scope="col">Quantity</th>
+            </tr>
+        </thead>
+        
+        <tr *ngFor="let food of topFoods">
+            <td>{{ food.description }}</td>
+            <td>{{ food.measure }}</td>
+            <td>{{ food.quantity }}</td>
+       </tr>
+    </table>
+
 

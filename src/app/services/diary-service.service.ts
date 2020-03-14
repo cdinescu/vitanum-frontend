@@ -7,15 +7,13 @@ import {DiaryEntry} from '../common/diary-entry';
 export class DiaryServiceService {
     constructor() { }
 
-  getDiaryEntries() : DiaryEntry[] {
-    let diaryEntry = new DiaryEntry();
-    diaryEntry.description = "Tomato"
+  getDiaryEntries(): DiaryEntry[] {
+    const diaryEntry = new DiaryEntry();
+    diaryEntry.description = 'Tomato';
     diaryEntry.amount = 90;
     diaryEntry.calories = 40;
     diaryEntry.unit = 'g';
 
-    let diaryEntries = [diaryEntry];
-
-    return diaryEntries;
+    return [diaryEntry];
   }
 }

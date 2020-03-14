@@ -27,8 +27,8 @@ import {
   ]
 })
 export class TabbedMenuComponent implements OnInit {
-  diaryMenuState:string = 'out';
-  askTheOracleMenuState:string = 'out';
+  diaryMenuState = 'out';
+  askTheOracleMenuState = 'out';
 
   constructor() { }
 
@@ -36,14 +36,12 @@ export class TabbedMenuComponent implements OnInit {
   }
 
   toggleDiary() {
-    console.log("Toggled diary!");
     // 1-line if statement that toggles the value:
     this.askTheOracleMenuState = 'out';
     this.diaryMenuState = this.diaryMenuState === 'out' ? 'in' : 'out';
   }
 
   toggleAskTheOracle() {
-    console.log("Toggled Ask the Oracle!");
     this.diaryMenuState = 'out';
     this.askTheOracleMenuState = this.askTheOracleMenuState === 'out' ? 'in' : 'out';
   }

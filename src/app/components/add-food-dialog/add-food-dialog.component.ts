@@ -11,7 +11,7 @@ export class AddFoodDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.modalTitle = data.title;
-    console.log(data)
+    console.log(data);
   }
 
   ngOnInit(): void {
