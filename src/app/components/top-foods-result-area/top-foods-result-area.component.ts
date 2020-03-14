@@ -25,7 +25,7 @@ export class TopFoodsResultAreaComponent implements OnInit {
   }
 
   sendRequest(askOracleQuery: AskOracleQuery) {
-    this.askOracleServiceService.sendRequest('iron', askOracleQuery.maxResult).subscribe(response => {
+    this.askOracleServiceService.sendRequest(askOracleQuery.nutrientName, askOracleQuery.maxResult).subscribe(response => {
       this.topFoods = [];
       for (const data of response.body) {
         this.topFoods.push(data);

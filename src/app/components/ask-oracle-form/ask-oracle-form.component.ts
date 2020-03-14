@@ -34,7 +34,7 @@ export class AskOracleFormComponent implements OnInit {
   onSubmitClick() {
     console.log('selected food: ' + this.selectedFoodName + ' selected food count: ' + this.selectedFoodCount);
     const askOracleQuery = new AskOracleQuery();
-    askOracleQuery.nutrientName = 'iron';
+    askOracleQuery.nutrientName = this.selectedFoodName;
     askOracleQuery.maxResult = this.selectedFoodCount;
 
     this.askOracleSharedDataService.nextQuery(askOracleQuery);

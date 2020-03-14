@@ -12,7 +12,6 @@ export class AskOracleSharedDataService {
   constructor() { }
 
   nextQuery(query: AskOracleQuery) {
-    console.log('next >>>> ' + query);
     this.query.next(query);
   }
 }
