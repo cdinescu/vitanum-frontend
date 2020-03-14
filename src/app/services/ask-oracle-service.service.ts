@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AskOracleServiceService {
   private baseUrl = 'http://192.168.0.144:8082/top-richest-foods';
 
-  private foodEndPoints = new Map<string, string>(); 
+  private foodEndPoints = new Map<string, string>();
 
   constructor(private httpClient: HttpClient) {
     this.setUpFoodEndpoints();
@@ -56,7 +56,6 @@ export class AskOracleServiceService {
   }
 
   sendRequest(foodName: string, foodCount: number): Observable<HttpResponse<Food[]>> {
-    console.log("heeeey: " + foodName + " >>>> " + this.foodEndPoints.get(foodName));
     const foodEndPoint = this.foodEndPoints.get(foodName);
     const requestUrl = `${this.baseUrl}/${foodEndPoint}?maxRecordCount=${foodCount}`;
 
