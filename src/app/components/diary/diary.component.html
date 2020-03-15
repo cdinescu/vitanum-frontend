@@ -1,8 +1,8 @@
 <aside class="menu-sidebar d-none d-lg-block">
   <div class="logo">
-      <a routerLink="/diaries" class="nav-link" routeLinkActive="active-link">
-          <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
-      </a>
+    <a routerLink="/diaries" class="nav-link" routeLinkActive="active-link">
+      <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
+    </a>
   </div>
   <br>
   <div>
@@ -18,23 +18,22 @@
 
 <hr>
 <table class="table table-striped">
-    <thead class="text-light bg-secondary">
-      <tr>
-        <th scope="col">Description</th>
-        <th scope="col">Amount</th>
-        <th scope="col">Unit</th>
-        <th scope="col">Calories</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- loop over the collection of diary entries -->
-        <tr *ngFor="let tempDiaryEntry of diaryEntries">
-          <th scope="row">{{ tempDiaryEntry.description }}</th>
-          <td>{{ tempDiaryEntry.amount }}</td>
-          <td>{{ tempDiaryEntry.unit }}</td>
-          <td>{{ tempDiaryEntry.calories }}</td>
-        </tr>
+  <thead class="text-light bg-secondary">
+    <tr>
+      <th scope="col">Description</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Unit</th>
+      <th scope="col">Calories</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- loop over the collection of diary entries -->
+    <tr *ngFor="let tempDiaryEntry of diaryEntries">
+      <th scope="row">{{ tempDiaryEntry.description }}</th>
+      <td>{{ tempDiaryEntry.amount }}</td>
+      <td>{{ tempDiaryEntry.unit }}</td>
+      <td>{{ tempDiaryEntry.calories }}</td>
+    </tr>
 
-    </tbody>
+  </tbody>
 </table>
-
