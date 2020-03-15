@@ -18,14 +18,15 @@ import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AskOracleSharedDataService } from '../app/services/ask-oracle-shared-data.service';
+import { FoodService } from './services/food.service';
 
 
 const routes: Routes = [
-  {path: 'diaries/:id', component: DiaryComponent},
-  {path: 'ask-the-oracle', component: TopFoodsResultAreaComponent },
-  {path: 'diaries', component: DiaryComponent},
-  {path: '', redirectTo: '/diaries', pathMatch: 'full'},
-  {path: '**',  redirectTo: '/diaries', pathMatch: 'full'},
+  { path: 'diaries/:id', component: DiaryComponent },
+  { path: 'ask-the-oracle', component: TopFoodsResultAreaComponent },
+  { path: 'diaries', component: DiaryComponent },
+  { path: '', redirectTo: '/diaries', pathMatch: 'full' },
+  { path: '**', redirectTo: '/diaries', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -49,7 +50,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [DiaryServiceService, HttpClientModule, AskOracleSharedDataService],
+  providers: [HttpClientModule, DiaryServiceService, AskOracleSharedDataService, FoodService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

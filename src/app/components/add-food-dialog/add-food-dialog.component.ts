@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Food } from 'src/app/common/food';
+import { FoodService } from 'src/app/services/food.service';
 
 @Component({
   selector: 'app-add-food-dialog',
@@ -9,12 +11,22 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class AddFoodDialogComponent implements OnInit {
   modalTitle: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  searchKeyword: string;
+
+  searchResult: Food[];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private foodService: FoodService) {
     this.modalTitle = data.title;
-    console.log(data);
   }
 
   ngOnInit(): void {
+    this.searchKeyword = '';
+    this.searchResult = [];
+  }
+
+  doSearch() {
+    console.log('Do search: ' + this.searchKeyword);
+    this.searchResult = this.foodService.getSearchResult(this.searchKeyword);
   }
 
 }

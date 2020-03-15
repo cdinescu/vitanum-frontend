@@ -16,6 +16,7 @@
             <th scope="col">Description</th>
             <th scope="col">Measure</th>
             <th scope="col">Quantity</th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
@@ -24,6 +25,7 @@
             <td>{{ food.description }}</td>
             <td>{{ food.measure }}</td>
             <td>{{ food.quantity }}</td>
+            <td><button (click)="addFoodToDiary(food)" class="btn btn-success">Add to Diary</button></td>
         </tr>
     </tbody>
 </table>

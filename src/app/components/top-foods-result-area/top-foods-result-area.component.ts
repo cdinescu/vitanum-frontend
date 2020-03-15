@@ -33,4 +33,8 @@ export class TopFoodsResultAreaComponent implements OnInit {
     });
   }
 
+  addFoodToDiary(food: Food) {
+    console.log('Add food to current diary');
+  }
+
 }
