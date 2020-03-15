@@ -6,8 +6,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AskOracleSharedDataService {
-   private query = new BehaviorSubject(new AskOracleQuery());
-   sharedQuery = this.query.asObservable();
+  private query = new BehaviorSubject(new AskOracleQuery());
+  sharedQuery = this.query.asObservable();
 
   constructor() { }
 

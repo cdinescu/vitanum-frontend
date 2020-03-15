@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     BrowserAnimationsModule
   ],
-  providers: [ MatDatepickerModule ],
+  providers: [MatDatepickerModule],
 })
 
 export class MaterialModule {

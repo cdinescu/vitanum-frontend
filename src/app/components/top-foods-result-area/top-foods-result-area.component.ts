@@ -14,7 +14,7 @@ export class TopFoodsResultAreaComponent implements OnInit {
 
   topFoods: Food[] = [];
 
-  constructor(private askOracleServiceService: AskOracleServiceService, private askOracleSharedDataService: AskOracleSharedDataService) {}
+  constructor(private askOracleServiceService: AskOracleServiceService, private askOracleSharedDataService: AskOracleSharedDataService) { }
 
   ngOnInit(): void {
     this.askOracleSharedDataService.sharedQuery.subscribe(query => {
