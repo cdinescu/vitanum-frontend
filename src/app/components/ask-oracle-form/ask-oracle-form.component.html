@@ -1,21 +1,21 @@
 <div class="form-block">
-  <div>
-    <label>Search nutrient</label>
-    <br>
-    <select [(ngModel)]="selectedFoodName">
-      <option *ngFor="let foodName of foodNames" [ngValue]="foodName">{{foodName}}</option>
-    </select>
+  <div class="container">
+
+    <form (ngSubmit)="!askOracleForm.invalid && onSubmitClick()" #askOracleForm="ngForm">
+      <fieldset class="form-group">
+        <label>Search nutrient</label>
+        <select [(ngModel)]="selectedFoodName" class="form-control" name="selectedFoodName">
+          <option *ngFor="let foodName of foodNames" [ngValue]="foodName">{{ foodName }}</option>
+        </select>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Find the top</label>
+        <select [(ngModel)]="selectedFoodCount" class="form-control" name="selectedFoodCount">
+          <option *ngFor="let foodCount of topFoodCountOptions" [value]="foodCount">{{ foodCount }}</option>
+        </select>
+      </fieldset>
+
+      <button type="button" class="btn btn-info" (click)="onSubmitClick()">Submit</button>
+    </form>
   </div>
-  <p>
-
-    <div>
-      <label>Find the top</label>
-      <br>
-      <select [(ngModel)]="selectedFoodCount">
-        <option *ngFor="let foodCount of topFoodCountOptions" [ngValue]="foodCount">{{foodCount}}</option>
-      </select>
-    </div>
-
-    <br>
-    <button type="button" class="btn btn-info" (click)="onSubmitClick()">Submit</button>
 </div>

@@ -10,7 +10,7 @@
     [ngModel]="searchKeyword" (ngModelChange)="searchKeyword = $event" name="searchKeyword"
     (keydown.enter)="$event.stopPropagation()">
   <div style="margin:10px;">
-    <button (click)="doSearch()" class="btn btn-success">Search</button>
+    <button (click)="doSearch()" class="btn btn-info">Search</button>
   </div>
 </form>
 
