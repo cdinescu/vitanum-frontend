@@ -17,6 +17,8 @@ export class AddFoodDialogComponent implements OnInit {
 
   searchResult: Food[];
 
+  loadFoodLogger: boolean = false;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private foodService: FoodService) {
     this.modalTitle = data.title;
   }
@@ -44,6 +46,11 @@ export class AddFoodDialogComponent implements OnInit {
 
   setSelected(food: Food) {
     console.log('Selected: ' + food.description);
+
+    this.loadFoodLogger = true;
   }
 
+  closeLogForm() {
+    this.loadFoodLogger = false;
+  }
 }
