@@ -4,6 +4,7 @@ import { DiaryEntry } from 'src/app/common/diary-entry';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { Diary } from 'src/app/common/diary';
+import { Food } from 'src/app/common/food';
 
 @Component({
   selector: 'app-diary',
@@ -57,6 +58,10 @@ export class DiaryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  addFoodEntry(food: Food) {
+
   }
 
   updateEntry(entryId: number) {

@@ -22,10 +22,10 @@
 
     <tbody>
         <tr *ngFor="let food of topFoods">
-            <td>{{ food.description }}</td>
+            <td style="width: 40%;word-wrap: break-word;">{{ food.description }}</td>
             <td>{{ food.measure }}</td>
             <td>{{ food.quantity }}</td>
-            <td><button (click)="addFoodToDiary(food)" class="btn btn-success">Add to Diary</button></td>
+            <td><button (click)="addFoodToDiary(food)" class="btn btn-info">Add to Diary</button></td>
         </tr>
     </tbody>
 </table>

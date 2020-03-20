@@ -3,14 +3,15 @@
 <h4>{{modalTitle}}</h4>
 <hr>
 
-<form class="form-inline d-flex justify-content-center md-form form-sm active-cyan active-cyan-2 mt-2"
-  #searchForm="ngForm">
+<form (ngSubmit)="!searchForm.invalid && doSearch()"
+  class="form-inline d-flex justify-content-center md-form form-sm active-cyan active-cyan-2 mt-2" #searchForm="ngForm">
   <i class="fas fa-search" aria-hidden="true"></i>
   <input class="form-control form-control-sm ml-3 w-75" type="text" aria-label="Search" #targetDate="ngModel"
-    [ngModel]="searchKeyword" (ngModelChange)="searchKeyword = $event" name="searchKeyword"
-    (keydown.enter)="$event.stopPropagation()">
+    name="searchToken" required="required" minlength=2 [ngModel]="searchKeyword" (ngModelChange)="searchKeyword = $event"
+    name="searchKeyword" (keydown.enter)="$event.stopPropagation()">
+
   <div style="margin:10px;">
-    <button (click)="doSearch()" class="btn btn-info">Search</button>
+    <button (click)="doSearch()" class="btn btn-info" [disabled]="!searchForm.valid">Search</button>
   </div>
 </form>
 
@@ -24,6 +25,6 @@
   <tbody>
     <tr *ngFor="let food of searchResult">
       <td>{{ food.description }}</td>
-  </tr>
+    </tr>
   </tbody>
 </table>

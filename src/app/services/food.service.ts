@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Food } from '../common/food';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { FoodResponse } from '../common/food-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
 
-  constructor() { }
+  private baseUrl = 'http://192.168.0.144:8082/foods';
 
-  getSearchResult(searchKeyword: string): Food[] {
-    const food1 = new Food();
-    food1.description = 'Tomato';
-    food1.measure = 'g';
-    food1.quantity = 10;
+  constructor(private httpClient: HttpClient) { }
 
-    const food2 = new Food();
-    food2.description = 'Cheese';
-    food2.measure = 'g';
-    food2.quantity = 10;
+  getSearchResult(searchKeyword: string): Observable<FoodResponse[]> {
+    const requestUrl = `${this.baseUrl}/search?foodSearchKeyword=${searchKeyword}`;
 
-    return [food1, food2];
+    return this.httpClient.get<FoodResponse[]>(requestUrl);
   }
 }
