@@ -37,3 +37,7 @@ tr[click] {
 table.table.table-condensed {
   border: 1px solid #4dd0e1;
 }
+
+.table-condensed{
+  font-size: 15px;
+}

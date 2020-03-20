@@ -8,8 +8,11 @@
         Serving:
         <form class="form-inline">
             <input type="text" class="form-control" id="name" required size="5" style="text-align: center;">
-            <div style="float: right;">
-                <button style="margin:10px;" class="btn btn-info">Add</button>
+            <select [(ngModel)]="selectedMesurement" class="form-control" name="selectedMesurement">
+                <option *ngFor="let measurement of availableFoodMesurements" [value]="measurement">{{ measurement }}</option>
+              </select>
+            <div>
+                <button class="btn btn-info">Add</button>
             </div>
         </form>
     </div>
