@@ -31,22 +31,19 @@ export class AddFoodDialogComponent implements OnInit {
     this.searchResult = [];
 
     this.foodService.getSearchResult(this.searchKeyword).subscribe(response => {
-      // for (const data of response.body) {
-      // let receivedFood = data;
-      // console.log('        Food service: ' + response);
-      //console.log(' {} ' + response.);
-      for (let foodResponse of response) {
-        //console.log(food);
-        //let foodResponse: FoodResponse;
-        //foodResponse = food;
-        let food = new Food();
+      for (const foodResponse of response) {
+        const food = new Food();
         food.description = foodResponse.name;
         food.ndbno = foodResponse.ndbno;
-        //food.description = foodResponse.
+
         this.searchResult.push(food);
       }
 
     });
+  }
+
+  setSelected(food: Food) {
+    console.log('Selected: ' + food.description);
   }
 
 }

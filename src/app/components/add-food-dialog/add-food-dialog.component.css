@@ -26,3 +26,10 @@
   .close {
     outline:0
   }
+
+.table-hover > tbody > tr:hover {
+    background-color: #4dd0e1;
+}
+tr[click] {
+    cursor: pointer;
+}

@@ -16,14 +16,14 @@
 </form>
 
 <hr>
-<table class="table table-striped">
+<table class="table table-striped table-sm table-hover">
   <thead class="text-light bg-secondary">
     <tr>
       <th scope="col">Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let food of searchResult">
+    <tr *ngFor="let food of searchResult" (click)="setSelected(food)" style="cursor: pointer;">
       <td>{{ food.description }}</td>
     </tr>
   </tbody>
