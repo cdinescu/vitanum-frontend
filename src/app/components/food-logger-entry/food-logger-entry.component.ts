@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Food } from 'src/app/common/food';
 import { FoodService } from 'src/app/services/food.service';
+import { DiaryServiceService } from 'src/app/services/diary-service.service';
+import { DiaryEntry } from 'src/app/common/diary-entry';
 
 @Component({
   selector: 'app-food-logger-entry',
@@ -11,16 +13,26 @@ export class FoodLoggerEntryComponent implements OnInit {
   @Input()
   foodAboutToBeLogged: Food;
 
-  servingsCount: number;
+  servingsCount: number = 1; // default
 
   availableFoodMesurements: String[] = ['g', 'mg', 'l', 'ml'];
   selectedMesurement: String;
 
-  constructor(private foodService: FoodService) { }
+  constructor(private foodService: FoodService, private diaryServiceService: DiaryServiceService) { }
 
   ngOnInit(): void {
     this.selectedMesurement = this.availableFoodMesurements[0];
     console.log('Input: ' + this.foodAboutToBeLogged);
+  }
+
+  addEntryToDiary() {
+    console.log(':) addEntryToDiary');
+    const entry = new DiaryEntry();
+    entry.description = this.foodAboutToBeLogged.description;
+    entry.amount = 100;
+    entry.calories = 100;
+
+    this.diaryServiceService.addEntry(entry);
   }
 
 }

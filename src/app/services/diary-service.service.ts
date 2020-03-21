@@ -55,4 +55,8 @@ export class DiaryServiceService {
     console.log(this.testMap);
     return this.testMap.get(targetDiaryDate);
   }
+
+  addEntry(entry: DiaryEntry) {
+    console.log('Adding entry: ' + entry);
+  }
 }
