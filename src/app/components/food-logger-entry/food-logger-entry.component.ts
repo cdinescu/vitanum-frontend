@@ -13,10 +13,10 @@ export class FoodLoggerEntryComponent implements OnInit {
   @Input()
   foodAboutToBeLogged: Food;
 
-  servingsCount: number = 1; // default
+  servingsCount = 1; // default
 
-  availableFoodMesurements: String[] = ['g', 'mg', 'l', 'ml'];
-  selectedMesurement: String;
+  availableFoodMesurements: string[] = ['g', 'mg', 'l', 'ml'];
+  selectedMesurement: string;
 
   constructor(private foodService: FoodService, private diaryServiceService: DiaryServiceService) { }
 

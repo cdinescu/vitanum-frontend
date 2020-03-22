@@ -19,7 +19,6 @@ export class TopFoodsResultAreaComponent implements OnInit {
   ngOnInit(): void {
     this.askOracleSharedDataService.sharedQuery.subscribe(query => {
       this.askOracleQuery = query;
-      console.log(' ======================= ' + this.askOracleQuery.nutrientName + ' ' + this.askOracleQuery.maxResult);
       this.sendRequest(this.askOracleQuery);
     });
   }

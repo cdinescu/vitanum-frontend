@@ -17,7 +17,7 @@ export class AddFoodDialogComponent implements OnInit {
 
   searchResult: Food[];
 
-  loadFoodLogger: boolean = false;
+  loadFoodLogger = false;
 
   selectedFood: Food;
 
@@ -31,7 +31,6 @@ export class AddFoodDialogComponent implements OnInit {
   }
 
   doSearch() {
-    console.log('Do search: ' + this.searchKeyword);
     this.searchResult = [];
 
     this.foodService.getSearchResult(this.searchKeyword).subscribe(response => {

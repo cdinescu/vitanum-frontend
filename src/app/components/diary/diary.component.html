@@ -6,12 +6,11 @@
   </div>
   <br>
 
-  <div>
+  <div class="container">
     <form (ngSubmit)="!diaryForm.invalid && fetchDiary()" #diaryForm="ngForm">
       <fieldset class="form-group">
-        <label>Target Date</label>
-        <input type="date" #targetDate="ngModel" [ngModel]="diaryTargetDate | date:'yyyy-MM-dd' "
-          (ngModelChange)="diaryTargetDate = $event" class="form-control" name="targetDate" required="required">
+        <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
+          (selectedChange)="diaryTargetDate = $event" name="targetDate"></mat-calendar>
       </fieldset>
 
       <button type="submit" class="btn btn-info">Submit</button>
