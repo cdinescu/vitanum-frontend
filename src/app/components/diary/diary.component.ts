@@ -25,20 +25,27 @@ export class DiaryComponent implements OnInit {
     this.listDiaryEntries();
   }
 
-  fetchDiary() {
-    console.log('Fetch dirty with date: ' + this.diaryTargetDate);
-    const targetDiary = this.diaryService.getDiary(this.diaryTargetDate + '');
-    console.log('..... Fetched: ' + targetDiary);
+  listDiaryEntries() {
+    this.diaryService.getDiaryEntries().subscribe(data => {
+      this.diaryEntries = data;
+      console.log('Received: ' + data);
 
-    if (targetDiary != null) {
-      this.selectedDiary = targetDiary;
-      console.log(' Its ok ' + this.selectedDiary.date + ' --- ' + this.selectedDiary.entries.length);
-      this.diaryEntries = this.selectedDiary.entries;
-    }
+      for(let d of this.diaryEntries) {
+        console.log('Received: ' + d.description);
+      }
+    });
   }
 
-  listDiaryEntries() {
-    this.diaryEntries = this.selectedDiary.entries;
+  addFoodEntry(food: Food) {
+    console.log('Add: ' + food);
+  }
+
+  updateEntry(entryId: number) {
+    console.log('Update: ' + entryId);
+  }
+
+  deleteEntry(entryId: number) {
+    console.log('Delete: ' + entryId);
   }
 
   openDialog() {
@@ -60,15 +67,4 @@ export class DiaryComponent implements OnInit {
     });
   }
 
-  addFoodEntry(food: Food) {
-
-  }
-
-  updateEntry(entryId: number) {
-    console.log('Update: ' + entryId);
-  }
-
-  deleteEntry(entryId: number) {
-    console.log('Delete: ' + entryId);
-  }
 }

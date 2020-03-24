@@ -2,61 +2,36 @@ import { Injectable } from '@angular/core';
 import { DiaryEntry } from '../common/diary-entry';
 import { Diary } from '../common/diary';
 import { DatePipe } from '@angular/common';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiaryServiceService {
-  pipe = new DatePipe('en-US');
-  testMap = new Map<string, Diary>();
 
-  constructor() {
-    let diary = new Diary();
-    diary.date = this.pipe.transform(new Date('2020-03-15'), 'yyyy-MM-dd');
+  private baseUrl = 'http://192.168.0.144:8082/api/diaryEntries/';
 
-    let diaryEntry = new DiaryEntry();
-    diaryEntry.description = 'Tomato';
-    diaryEntry.amount = 90;
-    diaryEntry.calories = 40;
-    diaryEntry.unit = 'g';
-    diaryEntry.id = 1;
+  constructor(private httpClient: HttpClient) { }
 
-    diary.entries = [diaryEntry];
+  getDiaryEntries(): Observable<DiaryEntry[]> {
+    //const foodEndPoint = this.foodEndPoints.get(foodName);
+    //const requestUrl = `${this.baseUrl}/${foodEndPoint}?maxRecordCount=${foodCount}`;
+    this.httpClient.get<GetResponseDiaryEntries>(this.baseUrl).pipe(map(response => response._embedded.diaryEntries)).subscribe(data => {
+      console.log('HEY: ' + data);
+    });
 
-    this.testMap.set(diary.date, diary);
-
-    diary = new Diary();
-    diary.date = this.pipe.transform(new Date('2020-03-30'), 'yyyy-MM-dd');
-
-    diaryEntry = new DiaryEntry();
-    diaryEntry.id = 2;
-    diaryEntry.description = 'Cheese';
-    diaryEntry.amount = 190;
-    diaryEntry.calories = 140;
-    diaryEntry.unit = 'g';
-
-    diary.entries = [diaryEntry];
-
-    this.testMap.set(diary.date, diary);
-  }
-
-  getDiaryEntries(): DiaryEntry[] {
-    const diaryEntry = new DiaryEntry();
-    diaryEntry.id = 3;
-    diaryEntry.description = 'Tomato';
-    diaryEntry.amount = 90;
-    diaryEntry.calories = 40;
-    diaryEntry.unit = 'g';
-
-    return [diaryEntry];
-  }
-
-  getDiary(targetDiaryDate: string) {
-    console.log(this.testMap);
-    return this.testMap.get(targetDiaryDate);
+    return this.httpClient.get<GetResponseDiaryEntries>(this.baseUrl).pipe(map(response => response._embedded.diaryEntries));
   }
 
   addEntry(entry: DiaryEntry) {
     console.log('Adding entry: ' + entry);
+  }
+}
+
+interface GetResponseDiaryEntries {
+  _embedded : {
+    diaryEntries: DiaryEntry[]
   }
 }

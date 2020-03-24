@@ -7,7 +7,7 @@
   <br>
 
   <div class="container">
-    <form (ngSubmit)="!diaryForm.invalid && fetchDiary()" #diaryForm="ngForm">
+    <form (ngSubmit)="!diaryForm.invalid && listDiaryEntries()" #diaryForm="ngForm">
       <fieldset class="form-group">
         <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
           (selectedChange)="diaryTargetDate = $event" name="targetDate"></mat-calendar>
