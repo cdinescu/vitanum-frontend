@@ -11,18 +11,27 @@ import { map } from 'rxjs/operators';
 })
 export class DiaryServiceService {
 
-  private baseUrl = 'http://192.168.0.144:8082/api/diaryEntries/';
+  private baseUrl = 'http://192.168.0.144:8082/api/diaryEntries';
 
   constructor(private httpClient: HttpClient) { }
 
-  getDiaryEntries(): Observable<DiaryEntry[]> {
-    //const foodEndPoint = this.foodEndPoints.get(foodName);
-    //const requestUrl = `${this.baseUrl}/${foodEndPoint}?maxRecordCount=${foodCount}`;
-    this.httpClient.get<GetResponseDiaryEntries>(this.baseUrl).pipe(map(response => response._embedded.diaryEntries)).subscribe(data => {
-      console.log('HEY: ' + data);
-    });
+  getDiaryEntries(diaryTargetDate: Date): Observable<DiaryEntry[]> {
+    let thisUrl = '';
+    if (diaryTargetDate != null) {
+      const formattedDate = diaryTargetDate.getFullYear() + '-' + ("0" + (diaryTargetDate.getMonth() + 1)).slice(-2) + '-' + ("0" + diaryTargetDate.getDate()).slice(-2);
+      console.log('Target date: ' + diaryTargetDate.getFullYear() + '-' + ("0" + (diaryTargetDate.getMonth() + 1)).slice(-2) + '-' + ("0" + diaryTargetDate.getDate()).slice(-2));
+      thisUrl = 'http://192.168.0.144:8082/api/diaryEntries/search/findByDate?date=' + formattedDate;
+    } else {
 
-    return this.httpClient.get<GetResponseDiaryEntries>(this.baseUrl).pipe(map(response => response._embedded.diaryEntries));
+    thisUrl = 'http://192.168.0.144:8082/api/diaryEntries/search/findByDate?date=2020-03-24';//this.baseUrl;
+  }
+    //if (diaryTargetDate != null) {
+    //const dateISO = '2020-03-22';//diaryTargetDate.toISOString().substring(0, 10);
+    //console.log('Fetching diaries logged at date: ' + dateISO);
+
+    //thisUrl = 'http://192.168.0.144:8082/api/diaryEntries/search/findByDate?date=2020-03-24';//`${this.baseUrl}/search/findByDate&date=${dateISO}`;
+    //}
+    return this.httpClient.get<GetResponseDiaryEntries>(thisUrl).pipe(map(response => response._embedded.diaryEntries));
   }
 
   addEntry(entry: DiaryEntry) {
@@ -31,7 +40,7 @@ export class DiaryServiceService {
 }
 
 interface GetResponseDiaryEntries {
-  _embedded : {
-    diaryEntries: DiaryEntry[]
+  _embedded: {
+    diaryEntries: DiaryEntry[];
   }
 }

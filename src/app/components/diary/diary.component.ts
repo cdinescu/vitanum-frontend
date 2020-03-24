@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { Diary } from 'src/app/common/diary';
 import { Food } from 'src/app/common/food';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-diary',
@@ -26,7 +27,7 @@ export class DiaryComponent implements OnInit {
   }
 
   listDiaryEntries() {
-    this.diaryService.getDiaryEntries().subscribe(data => {
+    this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => {
       this.diaryEntries = data;
       console.log('Received: ' + data);
 
