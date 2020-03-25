@@ -13,25 +13,21 @@ export class DiaryServiceService {
 
   private baseUrl = 'http://192.168.0.144:8082/api/diaryEntries';
 
+  private searchUrl = 'http://192.168.0.144:8082/api/diaryEntries/search';
+
   constructor(private httpClient: HttpClient) { }
 
   getDiaryEntries(diaryTargetDate: Date): Observable<DiaryEntry[]> {
-    let thisUrl = '';
-    if (diaryTargetDate != null) {
-      const formattedDate = diaryTargetDate.getFullYear() + '-' + ("0" + (diaryTargetDate.getMonth() + 1)).slice(-2) + '-' + ("0" + diaryTargetDate.getDate()).slice(-2);
-      console.log('Target date: ' + diaryTargetDate.getFullYear() + '-' + ("0" + (diaryTargetDate.getMonth() + 1)).slice(-2) + '-' + ("0" + diaryTargetDate.getDate()).slice(-2));
-      thisUrl = 'http://192.168.0.144:8082/api/diaryEntries/search/findByDate?date=' + formattedDate;
-    } else {
+    const formattedDate = this.formatDateInISOFormat(diaryTargetDate);
+    let thisUrl = `${this.searchUrl}/findByDate?date=${formattedDate}`;
 
-    thisUrl = 'http://192.168.0.144:8082/api/diaryEntries/search/findByDate?date=2020-03-24';//this.baseUrl;
-  }
-    //if (diaryTargetDate != null) {
-    //const dateISO = '2020-03-22';//diaryTargetDate.toISOString().substring(0, 10);
-    //console.log('Fetching diaries logged at date: ' + dateISO);
-
-    //thisUrl = 'http://192.168.0.144:8082/api/diaryEntries/search/findByDate?date=2020-03-24';//`${this.baseUrl}/search/findByDate&date=${dateISO}`;
-    //}
     return this.httpClient.get<GetResponseDiaryEntries>(thisUrl).pipe(map(response => response._embedded.diaryEntries));
+  }
+
+  private formatDateInISOFormat(diaryTargetDate: Date) {
+    return diaryTargetDate.getFullYear() + '-' +
+      ('0' + (diaryTargetDate.getMonth() + 1)).slice(-2) +
+      '-' + ('0' + diaryTargetDate.getDate()).slice(-2);
   }
 
   addEntry(entry: DiaryEntry) {
@@ -42,5 +38,5 @@ export class DiaryServiceService {
 interface GetResponseDiaryEntries {
   _embedded: {
     diaryEntries: DiaryEntry[];
-  }
+  };
 }

@@ -5,7 +5,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { Diary } from 'src/app/common/diary';
 import { Food } from 'src/app/common/food';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-diary',
@@ -22,18 +21,16 @@ export class DiaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.diaryTargetDate = new Date();
     this.selectedDiary = new Diary();
     this.listDiaryEntries();
+
+    console.log('Selected date: ' + this.diaryTargetDate);
   }
 
   listDiaryEntries() {
     this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => {
       this.diaryEntries = data;
-      console.log('Received: ' + data);
-
-      for(let d of this.diaryEntries) {
-        console.log('Received: ' + d.description);
-      }
     });
   }
 
