@@ -21,6 +21,7 @@ import { AskOracleSharedDataService } from '../app/services/ask-oracle-shared-da
 import { FoodService } from './services/food.service';
 import { FoodLoggerEntryComponent } from './components/food-logger-entry/food-logger-entry.component';
 import { SharedDiaryDataService } from './services/shared-diary-data.service';
+import { AddFoodFromTopFoodsComponent } from './components/add-food-from-top-foods/add-food-from-top-foods.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
     AskOracleFormComponent,
     TopFoodsResultAreaComponent,
     AddFoodDialogComponent,
-    FoodLoggerEntryComponent
+    FoodLoggerEntryComponent,
+    AddFoodFromTopFoodsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -2,8 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Food } from 'src/app/common/food';
 import { FoodService } from 'src/app/services/food.service';
-import { FoodResponse } from 'src/app/common/food-response';
-import { doesNotReject } from 'assert';
 
 @Component({
   selector: 'app-add-food-dialog',
