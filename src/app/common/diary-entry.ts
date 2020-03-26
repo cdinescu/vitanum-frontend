@@ -1,6 +1,6 @@
 export class DiaryEntry {
     id: number;
-    date: Date;
+    date: string;
     description: string;
     amount: number;
     unit: string;

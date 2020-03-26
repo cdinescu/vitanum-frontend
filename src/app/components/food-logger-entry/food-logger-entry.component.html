@@ -6,7 +6,7 @@
 <div class="container">
     <div>
         Serving:
-        <form (ngSubmit)="!foodLoggerForm.invalid && addEntryToDiary()" class="form-inline" #foodLoggerForm="ngForm">
+        <form (ngSubmit)="!foodLoggerForm.invalid" class="form-inline" #foodLoggerForm="ngForm">
 
             <input type="number" class="form-control" id="name" required="required" style="text-align: center;" min="1"
                 minlength=1 [ngModel]="servingsCount" (ngModelChange)="servingsCount = $event"

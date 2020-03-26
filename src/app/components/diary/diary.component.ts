@@ -4,7 +4,7 @@ import { DiaryEntry } from 'src/app/common/diary-entry';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { Diary } from 'src/app/common/diary';
-import { Food } from 'src/app/common/food';
+import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
 
 @Component({
   selector: 'app-diary',
@@ -17,7 +17,9 @@ export class DiaryComponent implements OnInit {
 
   diaryEntries: DiaryEntry[];
 
-  constructor(private diaryService: DiaryServiceService, private dialog: MatDialog) {
+  constructor(private diaryService: DiaryServiceService,
+    private sharedSelectedDiaryDateService: SharedDiaryDataService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -25,17 +27,19 @@ export class DiaryComponent implements OnInit {
     this.selectedDiary = new Diary();
     this.listDiaryEntries();
 
+    this.sharedSelectedDiaryDateService.updateDiaryEntryQuery.subscribe(data => {
+      this.listDiaryEntries();
+    });
+
     console.log('Selected date: ' + this.diaryTargetDate);
   }
 
   listDiaryEntries() {
+    this.sharedSelectedDiaryDateService.nextDateQuery(this.diaryTargetDate);
+
     this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => {
       this.diaryEntries = data;
     });
-  }
-
-  addFoodEntry(food: Food) {
-    console.log('Add: ' + food);
   }
 
   updateEntry(entryId: number) {
@@ -44,6 +48,9 @@ export class DiaryComponent implements OnInit {
 
   deleteEntry(entryId: number) {
     console.log('Delete: ' + entryId);
+    this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => {
+      this.diaryEntries = data;
+    });
   }
 
   openDialog() {

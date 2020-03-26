@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AskOracleSharedDataService } from '../app/services/ask-oracle-shared-data.service';
 import { FoodService } from './services/food.service';
 import { FoodLoggerEntryComponent } from './components/food-logger-entry/food-logger-entry.component';
+import { SharedDiaryDataService } from './services/shared-diary-data.service';
 
 
 const routes: Routes = [
@@ -52,7 +53,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [HttpClientModule, DiaryServiceService, AskOracleSharedDataService, FoodService],
+  providers: [HttpClientModule, DiaryServiceService, AskOracleSharedDataService, FoodService, SharedDiaryDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
