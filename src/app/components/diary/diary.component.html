@@ -7,14 +7,9 @@
   <br>
 
   <div class="container">
-    <form (ngSubmit)="!diaryForm.invalid && listDiaryEntries()" #diaryForm="ngForm">
-      <fieldset class="form-group">
-        <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
-          (selectedChange)="diaryTargetDate = $event" name="targetDate"></mat-calendar>
-      </fieldset>
-
-      <button type="submit" class="btn btn-info">Submit</button>
-    </form>
+    <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
+      (selectedChange)="notifyDateChanged($event)">
+    </mat-calendar>
   </div>
 </aside>
 
@@ -36,9 +31,10 @@
     <!-- loop over the collection of diary entries -->
     <tr *ngFor="let tempDiaryEntry of diaryEntries">
       <th scope="row">{{ tempDiaryEntry.description }}</th>
-      <td contenteditable="true" (keyup)="changeValue(tempDiaryEntry, 'amount', $event)">{{ tempDiaryEntry.amount }}</td>
-      <td contenteditable="true" (keyup)="changeValue(tempDiaryEntry, 'unit', $event)">{{ tempDiaryEntry.unit }}</td>
-      <td contenteditable="true"(keyup)="changeValue(tempDiaryEntry, 'calories', $event)">{{ tempDiaryEntry.calories }}</td>
+      <td contenteditable="true" (blur)="changeValue(tempDiaryEntry, 'amount', $event)">{{ tempDiaryEntry.amount }}</td>
+      <td contenteditable="true" (blur)="changeValue(tempDiaryEntry, 'unit', $event)">{{ tempDiaryEntry.unit }}</td>
+      <td contenteditable="true" (blur)="changeValue(tempDiaryEntry, 'calories', $event)">{{ tempDiaryEntry.calories }}
+      </td>
       <td><button (click)="updateEntry(tempDiaryEntry)" class="btn btn-warning">Update</button></td>
       <td><button (click)="deleteEntry(tempDiaryEntry.id)" class="btn btn-danger">Delete</button></td>
     </tr>

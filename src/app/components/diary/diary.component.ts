@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { Diary } from 'src/app/common/diary';
 import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-diary',
@@ -12,7 +13,6 @@ import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.servi
   styleUrls: ['./diary.component.css']
 })
 export class DiaryComponent implements OnInit {
-  selectedDiary: Diary;
   diaryTargetDate: Date;
 
   diaryEntries: DiaryEntry[];
@@ -22,14 +22,19 @@ export class DiaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.diaryTargetDate = new Date();
-    this.selectedDiary = new Diary();
-    this.listDiaryEntries();
 
     this.sharedSelectedDiaryDateService.updateDiaryEntryQuery.subscribe(data => {
       this.listDiaryEntries();
     });
 
     console.log('Selected date: ' + this.diaryTargetDate);
+  }
+
+  notifyDateChanged(event: Date) {
+    console.log('Date changed event: ' + event);
+    this.diaryTargetDate = event;
+
+    this.listDiaryEntries();
   }
 
   listDiaryEntries() {
