@@ -17,9 +17,7 @@ export class DiaryComponent implements OnInit {
 
   diaryEntries: DiaryEntry[];
 
-  constructor(private diaryService: DiaryServiceService,
-    private sharedSelectedDiaryDateService: SharedDiaryDataService,
-    private dialog: MatDialog) {
+  constructor(private diaryService: DiaryServiceService, private sharedSelectedDiaryDateService: SharedDiaryDataService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -48,8 +46,9 @@ export class DiaryComponent implements OnInit {
 
   deleteEntry(entryId: number) {
     console.log('Delete: ' + entryId);
-    this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => {
-      this.diaryEntries = data;
+    this.diaryService.deleteDiaryEntry(entryId).subscribe(data => {
+      // refresh the diary entries
+      this.listDiaryEntries();
     });
   }
 

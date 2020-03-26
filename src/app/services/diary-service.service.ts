@@ -20,7 +20,7 @@ export class DiaryServiceService {
 
   getDiaryEntries(diaryTargetDate: Date): Observable<DiaryEntry[]> {
     const formattedDate = DateUtils.formatDateInISOFormat(diaryTargetDate);
-    let thisUrl = `${this.searchUrl}/findByDate?date=${formattedDate}`;
+    const thisUrl = `${this.searchUrl}/findByDate?date=${formattedDate}`;
 
     return this.httpClient.get<GetResponseDiaryEntries>(thisUrl).pipe(map(response => response._embedded.diaryEntries));
   }
@@ -28,6 +28,13 @@ export class DiaryServiceService {
   addDiaryEntry(diaryEntry: DiaryEntry): Observable<DiaryEntry> {
     console.log('POST: ' + diaryEntry);
     return this.httpClient.post<DiaryEntry>(this.baseUrl, diaryEntry);
+  }
+
+  deleteDiaryEntry(diaryEntryId: number): Observable<void> {
+    console.log('DELETE diary entry with id: ' + diaryEntryId);
+    const deleteUrl = `${this.baseUrl}/${diaryEntryId}`;
+
+    return this.httpClient.delete<void>(deleteUrl);
   }
 }
 

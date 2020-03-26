@@ -8,7 +8,7 @@ export class SharedDiaryDataService {
   private dateQuery = new BehaviorSubject(new Date());
   sharedDateQuery = this.dateQuery.asObservable();
 
-  private updateDiaryEntryModelQuery = new BehaviorSubject(new Boolean());
+  private updateDiaryEntryModelQuery = new BehaviorSubject(true);
   updateDiaryEntryQuery = this.updateDiaryEntryModelQuery.asObservable();
 
   constructor() { }
@@ -17,7 +17,7 @@ export class SharedDiaryDataService {
     this.dateQuery.next(query);
   }
 
-  nextUpdateDiaryEntryModelQuery(query: Boolean) {
+  nextUpdateDiaryEntryModelQuery(query: boolean) {
     this.updateDiaryEntryModelQuery.next(query);
   }
 }

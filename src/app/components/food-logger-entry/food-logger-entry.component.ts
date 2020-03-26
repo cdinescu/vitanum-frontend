@@ -24,9 +24,7 @@ export class FoodLoggerEntryComponent implements OnInit {
   availableFoodMesurements: string[] = ['g', 'mg', 'l', 'ml'];
   selectedMesurement: string;
 
-  constructor(private foodService: FoodService,
-    private sharedSelectedDiaryDateService: SharedDiaryDataService,
-    private diaryService: DiaryServiceService) { }
+  constructor(private foodService: FoodService, private sharedSelectedDiaryDateService: SharedDiaryDataService, private diaryService: DiaryServiceService) { }
 
   ngOnInit(): void {
     this.selectedMesurement = this.availableFoodMesurements[0];
