@@ -46,7 +46,7 @@ export class FoodLoggerEntryComponent implements OnInit {
     diaryEntry.unit = this.selectedMesurement;
     diaryEntry.calories = 250; // do something about this!
 
-    this.diaryService.addDiaryEntry(diaryEntry).subscribe(data => {
+    this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
       console.log('Got: ' + data.description);
       // notify diary component to send a new GET request
       this.sharedSelectedDiaryDateService.nextUpdateDiaryEntryModelQuery(this.UPDATE_DIARY_ENTRY_MODEL);

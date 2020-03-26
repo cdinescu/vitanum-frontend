@@ -40,8 +40,19 @@ export class DiaryComponent implements OnInit {
     });
   }
 
-  updateEntry(entryId: number) {
-    console.log('Update: ' + entryId);
+  changeValue(entry: DiaryEntry, property: string, event: any) {
+    console.log('+++ Prop: ' + property + ' before: ' + entry[property]);
+    entry[property] = event.target.textContent
+    console.log('--- Prop: ' + property + ' after: ' + entry[property]);
+  }
+
+  updateEntry(entry: DiaryEntry) {
+    console.log('Update: ' + entry.description);
+
+    this.diaryService.updateDiaryEntry(entry).subscribe(data => {
+      // refresh the diary entries
+      this.listDiaryEntries();
+    });
   }
 
   deleteEntry(entryId: number) {

@@ -25,9 +25,16 @@ export class DiaryServiceService {
     return this.httpClient.get<GetResponseDiaryEntries>(thisUrl).pipe(map(response => response._embedded.diaryEntries));
   }
 
-  addDiaryEntry(diaryEntry: DiaryEntry): Observable<DiaryEntry> {
+  postDiaryEntry(diaryEntry: DiaryEntry): Observable<DiaryEntry> {
     console.log('POST: ' + diaryEntry);
     return this.httpClient.post<DiaryEntry>(this.baseUrl, diaryEntry);
+  }
+
+  updateDiaryEntry(diaryEntry: DiaryEntry): Observable<any> {
+    console.log('UPDATE diary entry with id: ' + diaryEntry.id);
+    const updateUrl = `${this.baseUrl}/${diaryEntry.id}`;
+
+    return this.httpClient.put<any>(updateUrl, diaryEntry);
   }
 
   deleteDiaryEntry(diaryEntryId: number): Observable<void> {
