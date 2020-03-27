@@ -17,6 +17,7 @@ export class FoodLoggerEntryComponent implements OnInit {
   @Input()
   foodAboutToBeLogged: Food;
 
+  @Input()
   logEntryDate: Date;
 
   servingsCount = 1; // default

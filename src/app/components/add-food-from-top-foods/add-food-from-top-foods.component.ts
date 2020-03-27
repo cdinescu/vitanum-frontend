@@ -12,11 +12,18 @@ export class AddFoodFromTopFoodsComponent implements OnInit {
 
   foodSelectedFromTop: Food;
 
+  diaryTargetDate: Date;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.modalTitle = data.title;
   }
 
   ngOnInit(): void {
+  }
+
+  notifyDateChanged(event: Date) {
+    console.log('Date changed event: ' + event);
+    this.diaryTargetDate = event;
   }
 
 }
