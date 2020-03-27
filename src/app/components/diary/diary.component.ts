@@ -5,7 +5,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { Diary } from 'src/app/common/diary';
 import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-diary',
@@ -81,10 +80,7 @@ export class DiaryComponent implements OnInit {
       title: 'Add Food to Diary'
     };
 
-    const dialogRef = this.dialog.open(AddFoodDialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    this.dialog.open(AddFoodDialogComponent, dialogConfig);
   }
 
 }
