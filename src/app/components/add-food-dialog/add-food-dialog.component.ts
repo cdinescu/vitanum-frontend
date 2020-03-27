@@ -44,7 +44,7 @@ export class AddFoodDialogComponent implements OnInit {
   }
 
   setSelected(food: Food) {
-    console.log('Selected: ' + food.description);
+    console.log('Selected: ' + food.description + ' with ndbNo: ' + food.ndbno);
 
     this.selectedFood = food;
     this.loadFoodLogger = true;

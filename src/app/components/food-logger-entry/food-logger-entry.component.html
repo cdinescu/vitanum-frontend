@@ -13,7 +13,7 @@
                 name="selectedServingSize">
 
             <select [(ngModel)]="selectedMesurement" class="form-control" name="selectedMesurement">
-                <option *ngFor="let measurement of availableFoodMesurements" [value]="measurement">{{ measurement }}
+                <option *ngFor="let measurement of availableFoodMesurements" [value]="measurement">{{ measurement.label }}
                 </option>
             </select>
             <div>

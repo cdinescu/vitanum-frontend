@@ -5,6 +5,7 @@ import { DiaryServiceService } from 'src/app/services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
 import { DateUtils } from 'src/app/common/date-utils';
+import { Measure } from 'src/app/common/measure';
 
 @Component({
   selector: 'app-food-logger-entry',
@@ -22,14 +23,40 @@ export class FoodLoggerEntryComponent implements OnInit {
 
   servingsCount = 1; // default
 
-  availableFoodMesurements: string[] = ['g', 'mg', 'l', 'ml'];
-  selectedMesurement: string;
+  defaultMesurement: Measure;
+  availableFoodMesurements: Measure[];
+  selectedMesurement: Measure;
 
-  constructor(private foodService: FoodService, private sharedSelectedDiaryDateService: SharedDiaryDataService, private diaryService: DiaryServiceService) { }
+  constructor(private foodService: FoodService, private sharedSelectedDiaryDateService: SharedDiaryDataService, private diaryService: DiaryServiceService) {
+    this.defaultMesurement = new Measure();
+
+    this.defaultMesurement.label = 'g';
+    this.defaultMesurement.eqv = 1;
+    this.defaultMesurement.eunit = 'g';
+    this.defaultMesurement.qty = 1;
+    this.defaultMesurement.value = 1;
+
+    this.availableFoodMesurements = [this.defaultMesurement]
+  }
 
   ngOnInit(): void {
     this.selectedMesurement = this.availableFoodMesurements[0];
+
     console.log('Input: ' + this.foodAboutToBeLogged.description);
+
+    // get the nutrients of the food
+    this.foodService.getNutrientReport(this.foodAboutToBeLogged).subscribe(nutrientResponse => {
+      this.foodAboutToBeLogged.nutrients = nutrientResponse;
+      let foodMeasures = null;
+
+      for (let nutrient of this.foodAboutToBeLogged.nutrients) {
+        if (foodMeasures == null) {
+          foodMeasures = nutrient.measures;
+        }
+      }
+
+      this.availableFoodMesurements = foodMeasures;
+    });
 
     this.sharedSelectedDiaryDateService.sharedDateQuery.subscribe(query => {
       this.logEntryDate = query;
@@ -44,7 +71,7 @@ export class FoodLoggerEntryComponent implements OnInit {
     diaryEntry.description = this.foodAboutToBeLogged.description;
     diaryEntry.date = DateUtils.formatDateInISOFormat(this.logEntryDate);
     diaryEntry.amount = this.servingsCount;
-    diaryEntry.unit = this.selectedMesurement;
+    diaryEntry.unit = this.selectedMesurement.eunit;
     diaryEntry.calories = 250; // do something about this!
 
     this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
@@ -52,6 +79,15 @@ export class FoodLoggerEntryComponent implements OnInit {
       // notify diary component to send a new GET request
       this.sharedSelectedDiaryDateService.nextUpdateDiaryEntryModelQuery(this.UPDATE_DIARY_ENTRY_MODEL);
     });
+  }
+
+  resetFoodSelection() {
+    this.foodAboutToBeLogged = null;
+    this.logEntryDate = null;
+    this.selectedMesurement = null;
+    this.servingsCount = null;
+    this.availableFoodMesurements = [this.defaultMesurement];
+
   }
 
 }
