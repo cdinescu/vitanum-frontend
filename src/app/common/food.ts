@@ -2,8 +2,8 @@ import { Nutrient } from './nutrient';
 
 export class Food {
     description: string;
-    measure: string;
-    quantity: number;
-    ndbno: string;
+
+    ndbNumber: string;
+
     nutrients: Nutrient[];
 }

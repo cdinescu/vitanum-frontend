@@ -12,11 +12,9 @@ export class AddFoodDialogComponent implements OnInit {
   modalTitle: string;
 
   searchKeyword: string;
-
   searchResult: Food[];
 
   loadFoodLogger = false;
-
   selectedFood: Food;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private foodService: FoodService) {
@@ -31,20 +29,13 @@ export class AddFoodDialogComponent implements OnInit {
   doSearch() {
     this.searchResult = [];
 
-    this.foodService.getSearchResult(this.searchKeyword).subscribe(response => {
-      for (const foodResponse of response) {
-        const food = new Food();
-        food.description = foodResponse.name;
-        food.ndbno = foodResponse.ndbno;
-
-        this.searchResult.push(food);
-      }
-
+    this.foodService.getSearchResult(this.searchKeyword).subscribe(data => {
+      this.searchResult = data;
     });
   }
 
   setSelected(food: Food) {
-    console.log('Selected: ' + food.description + ' with ndbNo: ' + food.ndbno);
+    console.log('Selected: ' + food.description + ' with ndbNo: ' + food.ndbNumber);
 
     this.selectedFood = food;
     this.loadFoodLogger = true;
