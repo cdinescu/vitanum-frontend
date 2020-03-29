@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Food } from 'src/app/common/food';
 import { FoodService } from 'src/app/services/food.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-add-food-dialog',
@@ -16,6 +17,8 @@ export class AddFoodDialogComponent implements OnInit {
 
   loadFoodLogger = false;
   selectedFood: Food;
+  selectedFoodBehaviour: any;
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private foodService: FoodService) {
     this.modalTitle = data.title;
@@ -24,6 +27,7 @@ export class AddFoodDialogComponent implements OnInit {
   ngOnInit(): void {
     this.searchKeyword = '';
     this.searchResult = [];
+    this.selectedFoodBehaviour = new BehaviorSubject(this.selectedFood);
   }
 
   doSearch() {
@@ -35,10 +39,12 @@ export class AddFoodDialogComponent implements OnInit {
   }
 
   setSelected(food: Food) {
-    console.log('Selected: ' + food.description + ' with ndbNo: ' + food.ndbNumber);
+    console.log('Selected: ' + food.description + ' with id: ' + food.fdcId);
 
     this.selectedFood = food;
     this.loadFoodLogger = true;
+
+    this.selectedFoodBehaviour.next(this.selectedFood);
   }
 
   closeLogForm() {

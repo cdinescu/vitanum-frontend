@@ -1,11 +1,5 @@
-import { Measure } from './measure';
-
 export class Nutrient {
-    nutrient_id: number;
+    number: string;
     name: string;
-    derivation: string;
-    group: string;
-    unit: string;
-    value: number;
-    measures: Measure[];
+    unitName: string;
 }

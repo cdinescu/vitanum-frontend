@@ -30,6 +30,12 @@
 .table-hover > tbody > tr:hover {
     background-color: #4dd0e1;
 }
+
+.table tr.active td {
+  background-color:#123456 !important;
+  color: white;
+}
+
 tr[click] {
     cursor: pointer;
 }

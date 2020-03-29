@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Food } from '../common/food';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Nutrient } from '../common/nutrient';
+import { FoodNutrient } from '../common/food-nutrient';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,20 @@ export class FoodService {
     return this.httpClient.get<Food[]>(requestUrl);
   }
 
-  getNutrientReport(food: Food): Observable<Nutrient[]> {
-    const requestUrl = `${this.baseUrl}/reports?ndbNo=${food.ndbNumber}`;
+  getNutrientReport(food: Food): Observable<FoodNutrient[]> {
+    let foodId = food.fdcId;
+    const requestUrl = `${this.baseUrl}/reports/${foodId}`;
+    console.log('Id: ' + food.fdcId);
 
-    return this.httpClient.get<Nutrient[]>(requestUrl);
+    return this.httpClient.get<FoodNutrient[]>(requestUrl);
+  }
+
+  searchFoodAndGetNdbNumber(food: Food): string {
+    let result: string;
+    this.getSearchResult(food.description).subscribe(data => {
+      result = data[0].fdcId;
+    });
+
+    return result;
   }
 }

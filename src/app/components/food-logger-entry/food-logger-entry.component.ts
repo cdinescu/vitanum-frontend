@@ -6,6 +6,7 @@ import { DiaryEntry } from 'src/app/common/diary-entry';
 import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
 import { DateUtils } from 'src/app/common/date-utils';
 import { Measure } from 'src/app/common/measure';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-food-logger-entry',
@@ -16,47 +17,38 @@ export class FoodLoggerEntryComponent implements OnInit {
   UPDATE_DIARY_ENTRY_MODEL = true;
 
   @Input()
-  foodAboutToBeLogged: Food;
+  foodAboutToBeLogged: Observable<Food>;
+  selectedFood;
 
   @Input()
   logEntryDate: Date;
 
   servingsCount = 1; // default
 
-  defaultMesurement: Measure;
-  availableFoodMesurements: Measure[];
-  selectedMesurement: Measure;
+  availableFoodMesurements = ['g', 'mg', 'l', 'ml'];
+  selectedMesurement: string;
 
   constructor(private foodService: FoodService, private sharedSelectedDiaryDateService: SharedDiaryDataService, private diaryService: DiaryServiceService) {
-    this.defaultMesurement = new Measure();
-
-    this.defaultMesurement.label = 'g';
-    this.defaultMesurement.eqv = 1;
-    this.defaultMesurement.eunit = 'g';
-    this.defaultMesurement.qty = 1;
-    this.defaultMesurement.value = 1;
-
-    this.availableFoodMesurements = [this.defaultMesurement]
   }
 
   ngOnInit(): void {
     this.selectedMesurement = this.availableFoodMesurements[0];
 
-    console.log('Input: ' + this.foodAboutToBeLogged.description);
+    this.foodAboutToBeLogged.subscribe(data => {
+      this.resetFoodSelection();
+      this.selectedFood = data;
 
-    // get the nutrients of the food
-    this.foodService.getNutrientReport(this.foodAboutToBeLogged).subscribe(nutrientResponse => {
-      this.foodAboutToBeLogged.nutrients = nutrientResponse;
-      let foodMeasures = null;
+      console.log('Input: ' + this.selectedFood.description);
+      // get the nutrients of the food
+      this.foodService.getNutrientReport(this.selectedFood).subscribe(nutrientResponse => {
+        this.selectedFood.foodNutrients = nutrientResponse;
 
-      for (let nutrient of this.foodAboutToBeLogged.nutrients) {
-        if (foodMeasures == null) {
-          foodMeasures = nutrient.measures;
+        for (let foodNutrient of this.selectedFood.foodNutrients) {
+          console.log('Nutrient: ' + foodNutrient.type + ' ' + foodNutrient.nutrient.name);
         }
-      }
-
-      this.availableFoodMesurements = foodMeasures;
+      });
     });
+
 
     this.sharedSelectedDiaryDateService.sharedDateQuery.subscribe(query => {
       this.logEntryDate = query;
@@ -65,13 +57,13 @@ export class FoodLoggerEntryComponent implements OnInit {
   }
 
   addEntryToDiary() {
-    console.log('................ADD ' + this.logEntryDate);
+    console.log('................ADD ' + this.logEntryDate + ' selected unit: ' + this.selectedMesurement);
     const diaryEntry = new DiaryEntry();
 
-    diaryEntry.description = this.foodAboutToBeLogged.description;
+    diaryEntry.description = this.selectedFood.description;
     diaryEntry.date = DateUtils.formatDateInISOFormat(this.logEntryDate);
     diaryEntry.amount = this.servingsCount;
-    diaryEntry.unit = this.selectedMesurement.eunit;
+    diaryEntry.unit = this.selectedMesurement;
     diaryEntry.calories = 250; // do something about this!
 
     this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
@@ -82,12 +74,8 @@ export class FoodLoggerEntryComponent implements OnInit {
   }
 
   resetFoodSelection() {
-    this.foodAboutToBeLogged = null;
-    this.logEntryDate = null;
-    this.selectedMesurement = null;
-    this.servingsCount = null;
-    this.availableFoodMesurements = [this.defaultMesurement];
-
+    this.selectedFood = null;
+    this.servingsCount = 1; // default
   }
 
 }
