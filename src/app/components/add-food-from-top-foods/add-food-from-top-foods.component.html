@@ -4,7 +4,7 @@
 <hr>
 
 
-<div class="menu-sidebar d-none d-lg-block">
+<aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a routerLink="/diaries" class="nav-link" routeLinkActive="active-link">
             <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
@@ -13,7 +13,7 @@
     <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
         (selectedChange)="notifyDateChanged($event)">
     </mat-calendar>
-</div>
+</aside>
 
 <app-food-logger-entry [foodAboutToBeLogged]="selectedFoodBehaviour" [logEntryDate]="diaryTargetDate">
 </app-food-logger-entry>
