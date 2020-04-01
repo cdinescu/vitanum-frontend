@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Food } from '../common/food';
-import { Observable } from 'rxjs';
+import { Observable, empty, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +55,10 @@ export class AskOracleServiceService {
   }
 
   sendRequest(foodName: string, foodCount: number): Observable<HttpResponse<Food[]>> {
+    if (foodName == null || foodCount == null) {
+      return empty();
+    }
+
     const foodEndPoint = this.foodEndPoints.get(foodName);
     const requestUrl = `${this.baseUrl}/${foodEndPoint}?maxRecordCount=${foodCount}`;
 

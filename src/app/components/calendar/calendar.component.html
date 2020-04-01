@@ -1,0 +1,5 @@
+<div class="container">
+    <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
+      (selectedChange)="notifyDateChanged($event)">
+    </mat-calendar>
+</div>

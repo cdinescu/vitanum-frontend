@@ -36,22 +36,11 @@ export class FoodLoggerEntryComponent implements OnInit {
     this.foodAboutToBeLogged.subscribe(data => {
       this.resetFoodSelection();
       this.selectedFood = data;
-
-      console.log('Input: ' + this.selectedFood.description);
-      // get the nutrients of the food
-      this.foodService.getNutrientReport(this.selectedFood).subscribe(nutrientResponse => {
-        this.selectedFood.foodNutrients = nutrientResponse;
-
-        for (let foodNutrient of this.selectedFood.foodNutrients) {
-          console.log('Nutrient: ' + foodNutrient.type + ' ' + foodNutrient.nutrient.name);
-        }
-      });
     });
 
 
     this.sharedSelectedDiaryDateService.sharedDateQuery.subscribe(query => {
       this.logEntryDate = query;
-      console.log('     Entry date: ' + this.logEntryDate);
     });
   }
 

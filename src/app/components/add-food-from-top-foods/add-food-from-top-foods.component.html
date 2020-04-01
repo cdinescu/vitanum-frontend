@@ -3,17 +3,5 @@
 <h4>{{modalTitle}}</h4>
 <hr>
 
-
-<aside class="menu-sidebar d-none d-lg-block">
-    <div class="logo">
-        <a routerLink="/diaries" class="nav-link" routeLinkActive="active-link">
-            <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
-        </a>
-    </div>
-    <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
-        (selectedChange)="notifyDateChanged($event)">
-    </mat-calendar>
-</aside>
-
 <app-food-logger-entry [foodAboutToBeLogged]="selectedFoodBehaviour" [logEntryDate]="diaryTargetDate">
 </app-food-logger-entry>

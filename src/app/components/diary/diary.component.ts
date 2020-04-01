@@ -44,9 +44,7 @@ export class DiaryComponent implements OnInit {
   }
 
   changeValue(entry: DiaryEntry, property: string, event: any) {
-    console.log('+++ Prop: ' + property + ' before: ' + entry[property]);
     entry[property] = event.target.textContent
-    console.log('--- Prop: ' + property + ' after: ' + entry[property]);
   }
 
   updateEntry(entry: DiaryEntry) {

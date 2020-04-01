@@ -22,11 +22,15 @@ import { FoodService } from './services/food.service';
 import { FoodLoggerEntryComponent } from './components/food-logger-entry/food-logger-entry.component';
 import { SharedDiaryDataService } from './services/shared-diary-data.service';
 import { AddFoodFromTopFoodsComponent } from './components/add-food-from-top-foods/add-food-from-top-foods.component';
+import { ReportComponent } from './components/report/report.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 
 const routes: Routes = [
   { path: 'diaries/:id', component: DiaryComponent },
   { path: 'ask-the-oracle', component: TopFoodsResultAreaComponent },
+  { path: 'generate-report', component: ReportComponent},
   { path: 'diaries', component: DiaryComponent },
   { path: '', redirectTo: '/diaries', pathMatch: 'full' },
   { path: '**', redirectTo: '/diaries', pathMatch: 'full' },
@@ -42,7 +46,10 @@ const routes: Routes = [
     TopFoodsResultAreaComponent,
     AddFoodDialogComponent,
     FoodLoggerEntryComponent,
-    AddFoodFromTopFoodsComponent
+    AddFoodFromTopFoodsComponent,
+    ReportComponent,
+    CalendarComponent,
+    SideMenuComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

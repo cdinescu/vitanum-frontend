@@ -1,19 +1,5 @@
-<aside class="menu-sidebar d-none d-lg-block">
-  <div class="logo">
-    <a routerLink="/diaries" class="nav-link" routeLinkActive="active-link">
-      <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
-    </a>
-  </div>
-  <br>
-
-  <div class="container">
-    <mat-calendar (ngModelChange)="diaryTargetDate = $event" [selected]="diaryTargetDate"
-      (selectedChange)="notifyDateChanged($event)">
-    </mat-calendar>
-  </div>
-</aside>
-
 <button type="button" class="btn btn-light mr-4" (click)="openDialog()">Add food</button>
+<button type="button" class="btn btn-light mr-4" [routerLink]="['/generate-report']">Generate report</button>
 
 <hr>
 <table class="table table-striped table-editable">
