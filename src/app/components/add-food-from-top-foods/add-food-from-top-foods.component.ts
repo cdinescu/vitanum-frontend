@@ -23,6 +23,7 @@ export class AddFoodFromTopFoodsComponent implements OnInit {
   ngOnInit(): void {
     this.diaryTargetDate = new Date();
     this.selectedFoodBehaviour = new BehaviorSubject(this.foodSelectedFromTop);
+    this.selectedFoodBehaviour.next(this.foodSelectedFromTop);
   }
 
   notifyDateChanged(event: Date) {

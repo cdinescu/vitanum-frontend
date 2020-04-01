@@ -13,7 +13,7 @@
   </div>
 </aside>
 
-<button type="button" class="btn btn-light" (click)="openDialog()">ADD FOOD</button>
+<button type="button" class="btn btn-light mr-4" (click)="openDialog()">Add food</button>
 
 <hr>
 <table class="table table-striped table-editable">
@@ -22,7 +22,6 @@
       <th scope="col">Description</th>
       <th scope="col">Amount</th>
       <th scope="col">Unit</th>
-      <th scope="col">Calories</th>
       <th scope="col">Update</th>
       <th scope="col">Delete</th>
     </tr>
@@ -33,8 +32,6 @@
       <th scope="row">{{ tempDiaryEntry.description }}</th>
       <td contenteditable="true" (blur)="changeValue(tempDiaryEntry, 'amount', $event)">{{ tempDiaryEntry.amount }}</td>
       <td contenteditable="true" (blur)="changeValue(tempDiaryEntry, 'unit', $event)">{{ tempDiaryEntry.unit }}</td>
-      <td contenteditable="true" (blur)="changeValue(tempDiaryEntry, 'calories', $event)">{{ tempDiaryEntry.calories }}
-      </td>
       <td><button (click)="updateEntry(tempDiaryEntry)" class="btn btn-warning">Update</button></td>
       <td><button (click)="deleteEntry(tempDiaryEntry.id)" class="btn btn-danger">Delete</button></td>
     </tr>

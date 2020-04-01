@@ -3,7 +3,6 @@ import { DiaryServiceService } from '../../services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
-import { Diary } from 'src/app/common/diary';
 import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
 
 @Component({

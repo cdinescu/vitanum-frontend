@@ -5,7 +5,6 @@ import { DiaryServiceService } from 'src/app/services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
 import { DateUtils } from 'src/app/common/date-utils';
-import { Measure } from 'src/app/common/measure';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -64,7 +63,6 @@ export class FoodLoggerEntryComponent implements OnInit {
     diaryEntry.date = DateUtils.formatDateInISOFormat(this.logEntryDate);
     diaryEntry.amount = this.servingsCount;
     diaryEntry.unit = this.selectedMesurement;
-    diaryEntry.calories = 250; // do something about this!
 
     this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
       console.log('Got: ' + data.description);

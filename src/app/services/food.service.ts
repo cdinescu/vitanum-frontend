@@ -35,7 +35,7 @@ export class FoodService {
   searchFoodAndGetNdbNumber(food: Food): Observable<FoodNutrient[]> {
     let result: Observable<FoodNutrient[]>;
     this.getSearchResult(food.description).subscribe(data => {
-      console.log('Finallt got: ' + data[0].description);
+      console.log('Finally got: ' + data[0].description);
       result = this.getNutrientReport(data[0]);
     });
 
