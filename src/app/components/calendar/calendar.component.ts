@@ -12,16 +12,11 @@ export class CalendarComponent implements OnInit {
   constructor(private calendarService: CalendarService) { }
 
   ngOnInit(): void {
-    console.log('In calendar :)');
     this.diaryTargetDate = new Date();
-
-    this.calendarService.selectedDate.subscribe(data => {
-      this.diaryTargetDate = data;
-    });
+    this.calendarService.selectedDate.subscribe(data => this.diaryTargetDate = data);
   }
 
   notifyDateChanged(event: Date) {
-    console.log('Date changed event: ' + event);
     this.calendarService.notifyDateChanged(event);
   }
 
