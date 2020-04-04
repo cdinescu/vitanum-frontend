@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FoodLoggerEntryComponent } from './food-logger-entry.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 describe('FoodLoggerEntryComponent', () => {
   let component: FoodLoggerEntryComponent;
@@ -9,7 +10,7 @@ describe('FoodLoggerEntryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, FormsModule],
       declarations: [ FoodLoggerEntryComponent ]
     })
     .compileComponents();
