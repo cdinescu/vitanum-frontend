@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialModule } from 'src/app/material.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { Food } from 'src/app/common/food';
 
 describe('FoodLoggerEntryComponent', () => {
   let component: FoodLoggerEntryComponent;
@@ -14,14 +16,23 @@ describe('FoodLoggerEntryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, FormsModule, MatIconModule, MaterialModule, MatDialogModule],
-      declarations: [ FoodLoggerEntryComponent ]
+      declarations: [FoodLoggerEntryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FoodLoggerEntryComponent);
     component = fixture.componentInstance;
+
+    let testFood = new Food();
+    testFood.description = 'test food';
+    testFood.measure = 'g';
+    testFood.quantity = 100;
+
+    component.selectedFood = testFood;
+
+    component.foodAboutToBeLogged = new Observable<Food>();
     fixture.detectChanges();
   });
 
