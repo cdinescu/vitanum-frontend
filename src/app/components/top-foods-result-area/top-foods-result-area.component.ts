@@ -47,6 +47,7 @@ export class TopFoodsResultAreaComponent implements OnInit {
 
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
+
     dialogConfig.data = {
       title: 'Add Food to Diary'
     };

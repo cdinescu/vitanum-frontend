@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DiaryEntry } from '../common/diary-entry';
-import { Diary } from '../common/diary';
-import { DatePipe } from '@angular/common';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Food } from '../common/food';
 import { DateUtils } from '../common/date-utils';
 
 @Injectable({
@@ -28,19 +25,16 @@ export class DiaryServiceService {
   }
 
   postDiaryEntry(diaryEntry: DiaryEntry): Observable<DiaryEntry> {
-    console.log('POST: ' + diaryEntry);
     return this.httpClient.post<DiaryEntry>(this.baseUrl, diaryEntry);
   }
 
   updateDiaryEntry(diaryEntry: DiaryEntry): Observable<any> {
-    console.log('UPDATE diary entry with id: ' + diaryEntry.id);
     const updateUrl = `${this.baseUrl}/${diaryEntry.id}`;
 
     return this.httpClient.put<any>(updateUrl, diaryEntry);
   }
 
   deleteDiaryEntry(diaryEntryId: number): Observable<void> {
-    console.log('DELETE diary entry with id: ' + diaryEntryId);
     const deleteUrl = `${this.baseUrl}/${diaryEntryId}`;
 
     return this.httpClient.delete<void>(deleteUrl);

@@ -14,9 +14,9 @@ describe('TopFoodsResultAreaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, MatIconModule, MaterialModule, MatDialogModule],
-      declarations: [ TopFoodsResultAreaComponent ]
+      declarations: [TopFoodsResultAreaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

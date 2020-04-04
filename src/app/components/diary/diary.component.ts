@@ -13,7 +13,7 @@ import { CalendarService } from 'src/app/services/calendar.service';
 export class DiaryComponent implements OnInit {
   diaryTargetDate: Date;
 
-  diaryEntries: DiaryEntry[];
+  diaryEntries: DiaryEntry[] = [];
 
   constructor(private diaryService: DiaryServiceService, private calendarService: CalendarService, private dialog: MatDialog) {
   }
