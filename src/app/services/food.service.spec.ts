@@ -30,7 +30,7 @@ describe('FoodService', () => {
     expect(service.getNutrientReport(food)).toBeInstanceOf(Observable);
   });
 
-  it('should be able to get nutrient report when food is is null', () => {
+  it('should be able to get nutrient report when food id is null', () => {
     let food = new Food();
     food.fdcId = null;
 

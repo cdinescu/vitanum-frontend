@@ -20,20 +20,8 @@ export class FoodService {
   }
 
   getNutrientReport(food: Food): Observable<FoodNutrient[]> {
-    const foodId = food.fdcId;
-
-    if (foodId == null) {
-      return this.searchFoodAndGetNdbNumber(food);
-    }
-
-    const requestUrl = `${this.baseUrl}/reports/${foodId}`;
+    const requestUrl = `${this.baseUrl}/reports/${food.fdcId}`;
     return this.httpClient.get<FoodNutrient[]>(requestUrl);
   }
 
-  private searchFoodAndGetNdbNumber(food: Food): Observable<FoodNutrient[]> {
-    let result: Observable<FoodNutrient[]>;
-    this.getSearchResult(food.description).subscribe(data => result = this.getNutrientReport(data[0]));
-
-    return result;
-  }
 }
