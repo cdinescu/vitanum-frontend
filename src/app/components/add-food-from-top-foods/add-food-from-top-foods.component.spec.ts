@@ -13,12 +13,12 @@ describe('AddFoodFromTopFoodsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, MatIconModule, MaterialModule, MatDialogModule],
-      declarations: [ AddFoodFromTopFoodsComponent ],
+      declarations: [AddFoodFromTopFoodsComponent],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -29,5 +29,21 @@ describe('AddFoodFromTopFoodsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have default values on fields', () => {
+    expect(component.diaryTargetDate).toBeDefined();
+    expect(component.selectedFoodBehaviour).toBeDefined();
+  });
+
+  it('should change date on change event', () => {
+    // Arrange
+    let newDate = new Date();
+
+    // Act
+    component.notifyDateChanged(newDate);
+
+    // Assert
+    expect(component.diaryTargetDate).toEqual(newDate)
   });
 });

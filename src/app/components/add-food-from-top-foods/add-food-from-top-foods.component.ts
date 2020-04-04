@@ -27,7 +27,6 @@ export class AddFoodFromTopFoodsComponent implements OnInit {
   }
 
   notifyDateChanged(event: Date) {
-    console.log('Date changed event: ' + event);
     this.diaryTargetDate = event;
   }
 
