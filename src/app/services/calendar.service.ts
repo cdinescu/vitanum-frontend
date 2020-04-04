@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { SharedDiaryDataService } from './shared-diary-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalendarService {
   selectedDate = new Subject<Date>();
+  currentlySelectedDate: Date;
 
-  constructor(private sharedSelectedDiaryDateService: SharedDiaryDataService) { }
+  constructor() {
+    this.currentlySelectedDate = new Date();
+  }
 
   notifyDateChanged(event: Date) {
-    console.log(`Heeeeey: ${event}`);
-
-    this.sharedSelectedDiaryDateService.nextDateQuery(event);
+    this.currentlySelectedDate = event;
     this.selectedDate.next(event);
   }
 }

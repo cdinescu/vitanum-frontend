@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Food } from 'src/app/common/food';
-import { FoodService } from 'src/app/services/food.service';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
-import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
 import { DateUtils } from 'src/app/common/date-utils';
 import { Observable } from 'rxjs';
+import { CalendarService } from 'src/app/services/calendar.service';
 
 @Component({
   selector: 'app-food-logger-entry',
@@ -19,7 +18,6 @@ export class FoodLoggerEntryComponent implements OnInit {
   foodAboutToBeLogged: Observable<Food>;
   selectedFood;
 
-  @Input()
   logEntryDate: Date;
 
   servingsCount = 1; // default
@@ -27,7 +25,7 @@ export class FoodLoggerEntryComponent implements OnInit {
   availableFoodMesurements = ['g', 'mg', 'l', 'ml'];
   selectedMesurement: string;
 
-  constructor(private foodService: FoodService, private sharedSelectedDiaryDateService: SharedDiaryDataService, private diaryService: DiaryServiceService) {
+  constructor(private calendarService: CalendarService, private diaryService: DiaryServiceService) {
   }
 
   ngOnInit(): void {
@@ -37,24 +35,18 @@ export class FoodLoggerEntryComponent implements OnInit {
       this.resetFoodSelection();
       this.selectedFood = data;
     });
-
-
-    this.sharedSelectedDiaryDateService.sharedDateQuery.subscribe(query => {
-      this.logEntryDate = query;
-    });
   }
 
   addEntryToDiary() {
-    console.log('................ADD ' + this.logEntryDate + ' selected unit: ' + this.selectedMesurement);
     const diaryEntry = new DiaryEntry();
 
+    this.logEntryDate = this.calendarService.currentlySelectedDate;
     diaryEntry.description = this.selectedFood.description;
     diaryEntry.date = DateUtils.formatDateInISOFormat(this.logEntryDate);
     diaryEntry.amount = this.servingsCount;
     diaryEntry.unit = this.selectedMesurement;
 
     this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
-      console.log('Got: ' + data.description);
       // notify diary component to send a new GET request
       this.diaryService.nextUpdateDiaryEntryModelQuery(this.UPDATE_DIARY_ENTRY_MODEL);
     });

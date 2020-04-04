@@ -13,7 +13,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe(url => console.log('URL: ' + url));
+    // this.router.events.subscribe(url => console.log('URL: ' + url));
   }
 
 }

@@ -26,44 +26,23 @@ export class DiaryComponent implements OnInit {
       this.listDiaryEntries();
     });
 
-    this.diaryService.updateDiaryEntryQuery.subscribe(data => {
-      this.listDiaryEntries();
-    });
-
-  }
-
-  notifyDateChanged(event: Date) {
-    console.log('Date changed event: ' + event);
-    this.diaryTargetDate = event;
-
-    this.listDiaryEntries();
+    this.diaryService.updateDiaryEntryQuery.subscribe(data => this.listDiaryEntries());
   }
 
   listDiaryEntries() {
-    this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => {
-      this.diaryEntries = data;
-    });
+    this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => this.diaryEntries = data);
+  }
+
+  updateEntry(entry: DiaryEntry) {
+    this.diaryService.updateDiaryEntry(entry).subscribe(data => this.listDiaryEntries());
+  }
+
+  deleteEntry(entryId: number) {
+    this.diaryService.deleteDiaryEntry(entryId).subscribe(data => this.listDiaryEntries());
   }
 
   changeValue(entry: DiaryEntry, property: string, event: any) {
     entry[property] = event.target.textContent;
-  }
-
-  updateEntry(entry: DiaryEntry) {
-    console.log('Update: ' + entry.description);
-
-    this.diaryService.updateDiaryEntry(entry).subscribe(data => {
-      // refresh the diary entries
-      this.listDiaryEntries();
-    });
-  }
-
-  deleteEntry(entryId: number) {
-    console.log('Delete: ' + entryId);
-    this.diaryService.deleteDiaryEntry(entryId).subscribe(data => {
-      // refresh the diary entries
-      this.listDiaryEntries();
-    });
   }
 
   openDialog() {
