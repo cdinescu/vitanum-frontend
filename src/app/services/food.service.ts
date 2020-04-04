@@ -27,17 +27,12 @@ export class FoodService {
     }
 
     const requestUrl = `${this.baseUrl}/reports/${foodId}`;
-    console.log('Id: ' + food.fdcId + ' -----> ' + requestUrl);
-
     return this.httpClient.get<FoodNutrient[]>(requestUrl);
   }
 
-  searchFoodAndGetNdbNumber(food: Food): Observable<FoodNutrient[]> {
+  private searchFoodAndGetNdbNumber(food: Food): Observable<FoodNutrient[]> {
     let result: Observable<FoodNutrient[]>;
-    this.getSearchResult(food.description).subscribe(data => {
-      console.log('Finally got: ' + data[0].description);
-      result = this.getNutrientReport(data[0]);
-    });
+    this.getSearchResult(food.description).subscribe(data => result = this.getNutrientReport(data[0]));
 
     return result;
   }
