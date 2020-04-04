@@ -25,7 +25,7 @@ describe('FoodLoggerEntryComponent', () => {
     fixture = TestBed.createComponent(FoodLoggerEntryComponent);
     component = fixture.componentInstance;
 
-    let testFood = new Food();
+    const testFood = new Food();
     testFood.description = 'test food';
     testFood.measure = 'g';
     testFood.quantity = 100;

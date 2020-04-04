@@ -38,7 +38,7 @@ describe('DiaryComponent', () => {
 
   it('should be able to update entries', () => {
     // Act
-    let diaryEntry = new DiaryEntry();
+    const diaryEntry = new DiaryEntry();
     component.updateEntry(diaryEntry);
 
     expect(component.diaryEntries).toEqual([]);
@@ -46,7 +46,7 @@ describe('DiaryComponent', () => {
 
   it('should be able to delete entries', () => {
     // Act
-    let diaryEntry = new DiaryEntry();
+    const diaryEntry = new DiaryEntry();
     component.deleteEntry(1);
 
     expect(component.diaryEntries).toEqual([]);

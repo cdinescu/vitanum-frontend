@@ -57,7 +57,7 @@ describe('AddFoodDialogComponent', () => {
 
   it('should able to change selected food', () => {
     // Arrange
-    let food = new Food();
+    const food = new Food();
     food.description = 'Random food';
 
     // Act

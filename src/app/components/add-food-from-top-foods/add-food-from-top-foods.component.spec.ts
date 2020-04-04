@@ -38,12 +38,12 @@ describe('AddFoodFromTopFoodsComponent', () => {
 
   it('should change date on change event', () => {
     // Arrange
-    let newDate = new Date();
+    const newDate = new Date();
 
     // Act
     component.notifyDateChanged(newDate);
 
     // Assert
-    expect(component.diaryTargetDate).toEqual(newDate)
+    expect(component.diaryTargetDate).toEqual(newDate);
   });
 });

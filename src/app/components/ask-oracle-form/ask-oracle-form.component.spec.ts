@@ -46,10 +46,6 @@ describe('AskOracleFormComponent', () => {
   });
 
   it('should be able to submit on click', () => {
-    // Arrange
-    let injectedService = TestBed.get(AskOracleSharedDataService);
-
-    // Act
     component.onSubmitClick();
 
     // no exception must be thrown

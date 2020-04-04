@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display sidebar', () => {
     page.navigateTo();
-    //console.log('Sidebar: ' + page.getSidebar());
+    // console.log('Sidebar: ' + page.getSidebar());
    // expect(page.getTitleText()).toEqual('vitanum-frontend app is running!');
   });
 

@@ -31,11 +31,11 @@ describe('TopFoodsResultAreaComponent', () => {
 
   it('should open add food dialog', () => {
     // Arrange
-    let food = new Food();
+    const food = new Food();
     food.description = 'New food description';
 
     // Act
-    let dialogRef = component.addFoodToDiary(food);
+    const dialogRef = component.addFoodToDiary(food);
 
     // Assert
     expect(dialogRef).toBeDefined();

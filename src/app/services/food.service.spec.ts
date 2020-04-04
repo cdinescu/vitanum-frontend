@@ -24,14 +24,14 @@ describe('FoodService', () => {
   });
 
   it('should be able to get nutrient report', () => {
-    let food = new Food();
+    const food = new Food();
     food.fdcId = '9';
 
     expect(service.getNutrientReport(food)).toBeInstanceOf(Observable);
   });
 
   it('should be able to get nutrient report when food id is null', () => {
-    let food = new Food();
+    const food = new Food();
     food.fdcId = null;
 
     expect(service.getNutrientReport(food)).toBeInstanceOf(Observable);

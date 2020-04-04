@@ -27,10 +27,10 @@ describe('AskOracleServiceService', () => {
   });
 
   it('should return an empty observable if the request\'s food count is null', () => {
-    expect(service.sendRequest("Tomato", null)).toEqual(EMPTY);
+    expect(service.sendRequest('Tomato', null)).toEqual(EMPTY);
   });
 
   it('should return a non-empty observable if the request parameters are not null', () => {
-    expect(service.sendRequest("Tomato", 10)).toBeInstanceOf(Observable);
+    expect(service.sendRequest('Tomato', 10)).toBeInstanceOf(Observable);
   });
 });
