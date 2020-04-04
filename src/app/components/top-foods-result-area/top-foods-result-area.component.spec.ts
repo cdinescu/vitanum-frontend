@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopFoodsResultAreaComponent } from './top-foods-result-area.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MaterialModule } from 'src/app/material.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('TopFoodsResultAreaComponent', () => {
   let component: TopFoodsResultAreaComponent;
@@ -9,7 +12,7 @@ describe('TopFoodsResultAreaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, MatIconModule, MaterialModule, MatDialogModule],
       declarations: [ TopFoodsResultAreaComponent ]
     })
     .compileComponents();

@@ -8,9 +8,10 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display sidebar', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('vitanum-frontend app is running!');
+    //console.log('Sidebar: ' + page.getSidebar());
+   // expect(page.getTitleText()).toEqual('vitanum-frontend app is running!');
   });
 
   afterEach(async () => {
