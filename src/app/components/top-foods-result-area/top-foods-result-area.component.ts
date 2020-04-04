@@ -3,7 +3,7 @@ import { AskOracleServiceService } from 'src/app/services/ask-oracle-service.ser
 import { Food } from 'src/app/common/food';
 import { AskOracleSharedDataService } from 'src/app/services/ask-oracle-shared-data.service';
 import { AskOracleQuery } from 'src/app/common/ask-oracle-query';
-import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddFoodFromTopFoodsComponent } from '../add-food-from-top-foods/add-food-from-top-foods.component';
 
 @Component({
@@ -25,7 +25,7 @@ export class TopFoodsResultAreaComponent implements OnInit {
     });
   }
 
-  sendRequest(askOracleQuery: AskOracleQuery) {
+  private sendRequest(askOracleQuery: AskOracleQuery) {
     this.askOracleServiceService.sendRequest(askOracleQuery.nutrientName, askOracleQuery.maxResult).subscribe(response => {
       this.topFoods = [];
       for (const data of response.body) {
@@ -34,11 +34,11 @@ export class TopFoodsResultAreaComponent implements OnInit {
     });
   }
 
-  addFoodToDiary(food: Food) {
-    this.openDialog(food);
+  addFoodToDiary(food: Food): MatDialogRef<AddFoodFromTopFoodsComponent, any> {
+    return this.openDialog(food);
   }
 
-  openDialog(food: Food) {
+  private openDialog(food: Food): MatDialogRef<AddFoodFromTopFoodsComponent, any> {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.height = '40%';
@@ -53,6 +53,8 @@ export class TopFoodsResultAreaComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AddFoodFromTopFoodsComponent, dialogConfig);
     dialogRef.componentInstance.foodSelectedFromTop = food;
+
+    return dialogRef;
   }
 
 }
