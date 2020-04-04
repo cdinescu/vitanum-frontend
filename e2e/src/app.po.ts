@@ -6,10 +6,6 @@ export class AppPage {
   }
 
   getSidebar(): Promise<string> {
-    return element(by.css('page-wrapper menu-sidebar d-none d-lg-block')).getText() as Promise<string>;
-  }
-
-  getTitleText(): Promise<string> {
-    return element(by.css('app-root .content span')).getText() as Promise<string>;
+    return element(by.css('page-wrapper')).getText() as Promise<string>;
   }
 }

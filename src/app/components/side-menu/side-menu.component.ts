@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-side-menu',
@@ -7,9 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent implements OnInit {
+  showAskOracleForm = false;
 
-  constructor() {}
+  constructor(router: Router) {
+    router.events.subscribe(val => {
+      console.log(`Route changed: ${val}`);
+      if (val instanceof NavigationEnd) {
+        this.showAskOracleForm = (val.urlAfterRedirects == '/ask-the-oracle');
+      }
+    });
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 }

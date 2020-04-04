@@ -6,12 +6,13 @@ describe('workspace-project App', () => {
 
   beforeEach(() => {
     page = new AppPage();
+    browser.waitForAngularEnabled(true);
   });
 
   it('should display sidebar', () => {
     page.navigateTo();
-    // console.log('Sidebar: ' + page.getSidebar());
-   // expect(page.getTitleText()).toEqual('vitanum-frontend app is running!');
+    //console.log('Sidebar: ' + page.getSidebar());
+    expect(page.getSidebar()).toBeDefined();
   });
 
   afterEach(async () => {
