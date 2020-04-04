@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AskOracleFormComponent } from './ask-oracle-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AskOracleServiceService } from 'src/app/services/ask-oracle-service.service';
+import { AskOracleSharedDataService } from 'src/app/services/ask-oracle-shared-data.service';
 
 describe('AskOracleFormComponent', () => {
   let component: AskOracleFormComponent;
@@ -20,7 +22,7 @@ describe('AskOracleFormComponent', () => {
     fixture = TestBed.createComponent(AskOracleFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -44,6 +46,12 @@ describe('AskOracleFormComponent', () => {
   });
 
   it('should be able to submit on click', () => {
-    expect(component.onSubmitClick).toHaveBeenCalled();
+    // Arrange
+    let injectedService = TestBed.get(AskOracleSharedDataService);
+
+    // Act
+    component.onSubmitClick();
+
+    // no exception must be thrown
   });
 });

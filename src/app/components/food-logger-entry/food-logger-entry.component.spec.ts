@@ -39,4 +39,29 @@ describe('FoodLoggerEntryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have available measurements', () => {
+    expect(component.availableFoodMesurements).toEqual(['g', 'mg', 'l', 'ml']);
+  });
+
+  it('should have a selected measure', () => {
+    expect(component.selectedMesurement).toEqual('g');
+  });
+
+  it('should reset entry', () => {
+    // Arrange
+    component.servingsCount = 125;
+
+    // Act
+    component.resetFoodSelection();
+
+    // Assert
+    expect(component.selectedFood).toEqual(null);
+    expect(component.servingsCount).toEqual(1);
+  });
+
+  it('should be able to add entry', () => {
+    expect(component.addEntryToDiary()).toBe();
+  });
+
 });

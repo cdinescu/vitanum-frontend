@@ -8,9 +8,7 @@ import { Router } from '@angular/router';
 })
 export class SideMenuComponent implements OnInit {
 
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 
