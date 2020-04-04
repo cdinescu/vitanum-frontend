@@ -3,7 +3,7 @@ import { DiaryEntry } from '../common/diary-entry';
 import { Diary } from '../common/diary';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Food } from '../common/food';
 import { DateUtils } from '../common/date-utils';
@@ -13,8 +13,10 @@ import { DateUtils } from '../common/date-utils';
 })
 export class DiaryServiceService {
   private baseUrl = 'http://192.168.0.144:8082/api/diaryEntries';
-
   private searchUrl = 'http://192.168.0.144:8082/api/diaryEntries/search';
+
+  private updateDiaryEntryModelQuery = new BehaviorSubject(true);
+  updateDiaryEntryQuery = this.updateDiaryEntryModelQuery.asObservable();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -42,6 +44,10 @@ export class DiaryServiceService {
     const deleteUrl = `${this.baseUrl}/${diaryEntryId}`;
 
     return this.httpClient.delete<void>(deleteUrl);
+  }
+
+  nextUpdateDiaryEntryModelQuery(query: boolean) {
+    this.updateDiaryEntryModelQuery.next(query);
   }
 }
 

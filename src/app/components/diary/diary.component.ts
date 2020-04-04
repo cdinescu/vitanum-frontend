@@ -3,7 +3,7 @@ import { DiaryServiceService } from '../../services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
-import { SharedDiaryDataService } from 'src/app/services/shared-diary-data.service';
+import { CalendarService } from 'src/app/services/calendar.service';
 
 @Component({
   selector: 'app-diary',
@@ -15,17 +15,21 @@ export class DiaryComponent implements OnInit {
 
   diaryEntries: DiaryEntry[];
 
-  constructor(private diaryService: DiaryServiceService, private sharedSelectedDiaryDateService: SharedDiaryDataService, private dialog: MatDialog) {
+  constructor(private diaryService: DiaryServiceService, private calendarService: CalendarService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.diaryTargetDate = new Date();
 
-    this.sharedSelectedDiaryDateService.updateDiaryEntryQuery.subscribe(data => {
+    this.calendarService.selectedDate.subscribe(data => {
+      this.diaryTargetDate = data;
       this.listDiaryEntries();
     });
 
-    console.log('Selected date: ' + this.diaryTargetDate);
+    this.diaryService.updateDiaryEntryQuery.subscribe(data => {
+      this.listDiaryEntries();
+    });
+
   }
 
   notifyDateChanged(event: Date) {
@@ -36,15 +40,13 @@ export class DiaryComponent implements OnInit {
   }
 
   listDiaryEntries() {
-    this.sharedSelectedDiaryDateService.nextDateQuery(this.diaryTargetDate);
-
     this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => {
       this.diaryEntries = data;
     });
   }
 
   changeValue(entry: DiaryEntry, property: string, event: any) {
-    entry[property] = event.target.textContent
+    entry[property] = event.target.textContent;
   }
 
   updateEntry(entry: DiaryEntry) {

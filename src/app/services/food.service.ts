@@ -20,7 +20,7 @@ export class FoodService {
   }
 
   getNutrientReport(food: Food): Observable<FoodNutrient[]> {
-    let foodId = food.fdcId;
+    const foodId = food.fdcId;
 
     if (foodId == null) {
       return this.searchFoodAndGetNdbNumber(food);

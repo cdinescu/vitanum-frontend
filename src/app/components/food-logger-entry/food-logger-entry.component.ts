@@ -56,7 +56,7 @@ export class FoodLoggerEntryComponent implements OnInit {
     this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
       console.log('Got: ' + data.description);
       // notify diary component to send a new GET request
-      this.sharedSelectedDiaryDateService.nextUpdateDiaryEntryModelQuery(this.UPDATE_DIARY_ENTRY_MODEL);
+      this.diaryService.nextUpdateDiaryEntryModelQuery(this.UPDATE_DIARY_ENTRY_MODEL);
     });
   }
 
