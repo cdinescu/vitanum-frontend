@@ -32,15 +32,10 @@ export class AddFoodDialogComponent implements OnInit {
 
   doSearch() {
     this.searchResult = [];
-
-    this.foodService.getSearchResult(this.searchKeyword).subscribe(data => {
-      this.searchResult = data;
-    });
+    this.foodService.getSearchResult(this.searchKeyword).subscribe(data => this.searchResult = data);
   }
 
   setSelected(food: Food) {
-    console.log('Selected: ' + food.description + ' with id: ' + food.fdcId);
-
     this.selectedFood = food;
     this.loadFoodLogger = true;
 
