@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AskOracleFormComponent } from './ask-oracle-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('AskOracleFormComponent', () => {
   let component: AskOracleFormComponent;
@@ -8,6 +9,7 @@ describe('AskOracleFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ AskOracleFormComponent ]
     })
     .compileComponents();

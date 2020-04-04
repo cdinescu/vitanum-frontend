@@ -8,12 +8,10 @@ import { Router } from '@angular/router';
 })
 export class SideMenuComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor() {
 
   }
 
-  ngOnInit(): void {
-    // this.router.events.subscribe(url => console.log('URL: ' + url));
-  }
+  ngOnInit(): void {}
 
 }
