@@ -25,4 +25,25 @@ describe('AskOracleFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should populate foods names', () => {
+    expect(component.foodNames).toBeDefined();
+    expect(component.foodNames.length).toEqual(31);
+  });
+
+  it('should have a default selected food', () => {
+    expect(component.selectedFoodName).toEqual('Caffeine');
+  });
+
+  it('should have a default selected food count', () => {
+    expect(component.selectedFoodCount).toEqual(25);
+  });
+
+  it('should have a food count option list', () => {
+    expect(component.topFoodCountOptions).toEqual([25, 50, 75, 100, 200]);
+  });
+
+  it('should be able to submit on click', () => {
+    expect(component.onSubmitClick).toHaveBeenCalled();
+  });
 });

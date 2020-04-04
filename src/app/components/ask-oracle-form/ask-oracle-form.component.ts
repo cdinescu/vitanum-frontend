@@ -21,13 +21,10 @@ export class AskOracleFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateFoodNames();
-
-    if (this.foodNames != null && this.foodNames.length > 0) {
-      this.selectedFoodName = this.foodNames[0];
-    }
+    this.selectedFoodName = this.foodNames[0];
   }
 
-  populateFoodNames() {
+  private populateFoodNames() {
     this.foodNames = this.askOracleServiceService.getFoodNames();
   }
 
