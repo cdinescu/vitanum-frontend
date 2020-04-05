@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
   let fixture: ComponentFixture<CalendarComponent>;
-  let calendarService = new CalendarService();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,23 +17,37 @@ describe('CalendarComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CalendarComponent);
-    component = new CalendarComponent(calendarService);
-    fixture.detectChanges();
+    component = fixture.componentInstance;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a default selected date', () => {
+  it('should have the selected date from the calendar service', () => {
     // Arrange
-    let date = new Date();
+    const date = new Date();
+    const calendarService: CalendarService = TestBed.get(CalendarService);
     calendarService.selectedDate.next(date);
 
-    // Act
+    // Act: forces a DOM update
+    fixture.detectChanges();
     component.ngOnInit();
 
     // Assert
-    expect(component.diaryTargetDate).toEqual(date);
+    expect(component.diaryTargetDate).toBeTruthy();
+  });
+
+  it('should notify the calendar service if the date changes', () => {
+    // Arrange
+    const date = new Date();
+    const calendarService = TestBed.get(CalendarService);
+    const spy = spyOn(calendarService, 'notifyDateChanged');
+
+    // Act
+    component.notifyDateChanged(date);
+
+    // Assert
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });
