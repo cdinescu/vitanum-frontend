@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AskOracleFormComponent } from './ask-oracle-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AskOracleSharedDataService } from 'src/app/services/ask-oracle-shared-data.service';
 
 describe('AskOracleFormComponent', () => {
   let component: AskOracleFormComponent;
@@ -12,26 +11,35 @@ describe('AskOracleFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, FormsModule],
-      declarations: [AskOracleFormComponent]
+      declarations: [ AskOracleFormComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AskOracleFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('should be able to submit on click', () => {
-    // Arrange
-    const askOracleSharedDataService = TestBed.get(AskOracleSharedDataService);
-    const spy = spyOn(askOracleSharedDataService, 'nextQuery');
+  it('should populate foods names', () => {
+    expect(component.foodNames).toBeDefined();
+    expect(component.foodNames.length).toEqual(31);
+  });
 
-    // Act
-    component.onSubmitClick();
+  it('should have a default selected food', () => {
+    expect(component.selectedFoodName).toEqual('Caffeine');
+  });
 
-    // Assert
-    expect(spy).toHaveBeenCalled();
+  it('should have a default selected food count', () => {
+    expect(component.selectedFoodCount).toEqual(25);
+  });
+
+  it('should have a food count option list', () => {
+    expect(component.topFoodCountOptions).toEqual([25, 50, 75, 100, 200]);
   });
 });

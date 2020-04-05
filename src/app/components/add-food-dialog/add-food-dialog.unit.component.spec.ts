@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Food } from 'src/app/common/food';
 import { FoodService } from 'src/app/services/food.service';
-import { of } from 'rxjs';
 
 describe('AddFoodDialogComponent', () => {
   let component: AddFoodDialogComponent;
@@ -35,21 +34,37 @@ describe('AddFoodDialogComponent', () => {
     component.loadFoodLogger = false;
   });
 
-  it('should search result is reset before a new search', () => {
-    // Arrange
-    component.searchResult = [new Food()];
-    const foodService = TestBed.get(FoodService);
-    const food = new Food();
-    food.description = 'Peach';
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    spyOn(foodService, 'getSearchResult').and.callFake(() => {
-      return of([food]);
-    });
+  it('should have default values on fields', () => {
+    expect(component.searchKeyword).toEqual('');
+    expect(component.searchResult).toEqual([]);
+    expect(component.selectedFoodBehaviour).toBeDefined();
+  });
+
+  it('should be able to change selected food', () => {
+    // Arrange
+    const food = new Food();
+    food.description = 'Random food';
 
     // Act
-    component.doSearch();
+    component.setSelected(food);
 
     // Assert
-    expect(component.searchResult).toEqual([food]);
+    expect(component.selectedFood).toEqual(food);
+    expect(component.loadFoodLogger).toEqual(true);
+  });
+
+  it('should be able to reset the close the form flag', () => {
+    // Arrange
+    component.loadFoodLogger = true;
+
+    // Act
+    component.closeLogForm();
+
+    // Assert
+    expect(component.loadFoodLogger).toEqual(false);
   });
 });
