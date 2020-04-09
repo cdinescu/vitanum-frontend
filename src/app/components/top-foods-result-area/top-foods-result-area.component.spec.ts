@@ -35,7 +35,7 @@ describe('TopFoodsResultAreaComponent', () => {
     food.description = 'New food description';
 
     // Act
-    //const dialogRef = component.addFoodToDiary(food);
+    // const dialogRef = component.addFoodToDiary(food);
 
     // Assert
    // expect(dialogRef).toBeDefined();

@@ -28,7 +28,7 @@ describe('AskOracleFormComponent', () => {
 
   it('should populate foods names', () => {
     expect(component.foodNames).toBeDefined();
-    expect(component.foodNames.length).toEqual(31);
+    expect(component.foodNames.length).toEqual(32);
   });
 
   it('should have a default selected food', () => {

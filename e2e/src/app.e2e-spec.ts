@@ -11,7 +11,6 @@ describe('workspace-project App', () => {
 
   it('should display sidebar', () => {
     page.navigateTo();
-    //console.log('Sidebar: ' + page.getSidebar());
     expect(page.getSidebar()).toBeDefined();
   });
 

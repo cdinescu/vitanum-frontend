@@ -19,7 +19,7 @@ describe('AskOracleServiceService', () => {
   });
 
   it('should have the nutrient map', () => {
-    expect(service.getFoodNames().length).toEqual(31);
+    expect(service.getNutrientNames().length).toEqual(32);
   });
 
   it('should return an empty observable if the request\'s food name is null', () => {
@@ -27,10 +27,10 @@ describe('AskOracleServiceService', () => {
   });
 
   it('should return an empty observable if the request\'s food count is null', () => {
-    expect(service.sendRequest('Tomato', null)).toEqual(EMPTY);
+    expect(service.sendRequest('Iron', null)).toEqual(EMPTY);
   });
 
   it('should return a non-empty observable if the request parameters are not null', () => {
-    expect(service.sendRequest('Tomato', 10)).toBeInstanceOf(Observable);
+    expect(service.sendRequest('Iron', 10)).toBeInstanceOf(Observable);
   });
 });

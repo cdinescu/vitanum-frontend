@@ -36,8 +36,8 @@ describe('DiaryComponent', () => {
 
   it('should be able to load service data on init', () => {
     // Arrange
-    const diaryService: DiaryServiceService = TestBed.get(DiaryServiceService);
-    const calendarService: CalendarService = TestBed.get(CalendarService);
+    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
+    const calendarService: CalendarService = TestBed.inject(CalendarService);
 
     const diaryEntry = new DiaryEntry();
     const diaryEntries: DiaryEntry[] = [diaryEntry];
@@ -54,7 +54,7 @@ describe('DiaryComponent', () => {
 
   it('should be able to list entries', () => {
     // Arrange
-    const diaryService: DiaryServiceService = TestBed.get(DiaryServiceService);
+    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
     const diaryEntry = new DiaryEntry();
     const diaryEntries: DiaryEntry[] = [diaryEntry];
     spyOn(diaryService, 'getDiaryEntries').and.returnValue(of(diaryEntries));
@@ -68,7 +68,7 @@ describe('DiaryComponent', () => {
 
   it('should be able to update entries', () => {
     // Arrange
-    const diaryService: DiaryServiceService = TestBed.get(DiaryServiceService);
+    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
     const diaryEntry = new DiaryEntry();
     const diaryEntries: DiaryEntry[] = [diaryEntry];
     spyOn(diaryService, 'getDiaryEntries').and.returnValue(of(diaryEntries));
@@ -82,7 +82,7 @@ describe('DiaryComponent', () => {
 
   xit('should be able to delete entries', () => {
     // Arrange
-    const diaryService: DiaryServiceService = TestBed.get(DiaryServiceService);
+    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
     const diaryEntry = new DiaryEntry();
     const diaryEntries: DiaryEntry[] = [diaryEntry];
     spyOn(diaryService, 'getDiaryEntries').and.returnValue(of(diaryEntries));
@@ -100,8 +100,8 @@ describe('DiaryComponent', () => {
     component.diaryEntries = [diaryEntry];
     fixture.detectChanges();
 
-    let warningButton = fixture.debugElement.query(By.css('.btn.btn-warning'));
-    const diaryService: DiaryServiceService = TestBed.get(DiaryServiceService);
+    const warningButton = fixture.debugElement.query(By.css('.btn.btn-warning'));
+    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
     const spy = spyOn(diaryService, 'updateDiaryEntry');
 
     // Act
@@ -118,8 +118,8 @@ describe('DiaryComponent', () => {
     component.diaryEntries = [diaryEntry];
     fixture.detectChanges();
 
-    let warningButton = fixture.debugElement.query(By.css('.btn.btn-danger'));
-    const diaryService: DiaryServiceService = TestBed.get(DiaryServiceService);
+    const warningButton = fixture.debugElement.query(By.css('.btn.btn-danger'));
+    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
     const spy = spyOn(diaryService, 'deleteDiaryEntry');
 
     // Act
@@ -133,12 +133,12 @@ describe('DiaryComponent', () => {
     // Arrange
     fixture.detectChanges();
 
-    let dialogButton = fixture.debugElement.queryAll(By.css('.btn-light'))[0];
+    const dialogButton = fixture.debugElement.queryAll(By.css('.btn-light'))[0];
     const spy = spyOn(component, 'openDialog');
 
     // Act
     dialogButton.triggerEventHandler('click', null);
-  
+
     // Assert
     expect(spy).toHaveBeenCalledTimes(1);
   });

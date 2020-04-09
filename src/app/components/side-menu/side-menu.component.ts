@@ -11,9 +11,8 @@ export class SideMenuComponent implements OnInit {
 
   constructor(router: Router) {
     router.events.subscribe(val => {
-      console.log(`Route changed: ${val}`);
       if (val instanceof NavigationEnd) {
-        this.showAskOracleForm = (val.urlAfterRedirects == '/ask-the-oracle');
+        this.showAskOracleForm = (val.urlAfterRedirects === '/ask-the-oracle');
       }
     });
   }

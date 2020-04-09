@@ -27,7 +27,7 @@ describe('CalendarComponent', () => {
   it('should have the selected date from the calendar service', () => {
     // Arrange
     const date = new Date();
-    const calendarService: CalendarService = TestBed.get(CalendarService);
+    const calendarService: CalendarService = TestBed.inject(CalendarService);
     calendarService.selectedDate.next(date);
 
     // Act: forces a DOM update
@@ -41,7 +41,7 @@ describe('CalendarComponent', () => {
   it('should notify the calendar service if the date changes', () => {
     // Arrange
     const date = new Date();
-    const calendarService = TestBed.get(CalendarService);
+    const calendarService = TestBed.inject(CalendarService);
     const spy = spyOn(calendarService, 'notifyDateChanged');
 
     // Act

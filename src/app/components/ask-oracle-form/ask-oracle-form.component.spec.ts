@@ -25,7 +25,7 @@ describe('AskOracleFormComponent', () => {
 
   it('should be able to submit on click', () => {
     // Arrange
-    const askOracleSharedDataService = TestBed.get(AskOracleSharedDataService);
+    const askOracleSharedDataService = TestBed.inject(AskOracleSharedDataService);
     const spy = spyOn(askOracleSharedDataService, 'nextQuery');
 
     // Act

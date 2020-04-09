@@ -25,7 +25,7 @@ export class AskOracleFormComponent implements OnInit {
   }
 
   private populateFoodNames() {
-    this.foodNames = this.askOracleServiceService.getFoodNames();
+    this.foodNames = this.askOracleServiceService.getNutrientNames();
   }
 
   onSubmitClick() {

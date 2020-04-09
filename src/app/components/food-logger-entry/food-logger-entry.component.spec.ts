@@ -47,7 +47,7 @@ describe('FoodLoggerEntryComponent', () => {
     component.foodAboutToBeLogged = of(testFood);
     fixture.detectChanges();
 
-    const diaryService: DiaryServiceService = TestBed.get(DiaryServiceService);
+    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
     spyOn(diaryService, 'postDiaryEntry').and.returnValue(of(createDiaryEntry()));
     const spy = spyOn(diaryService, 'nextUpdateDiaryEntryModelQuery');
 

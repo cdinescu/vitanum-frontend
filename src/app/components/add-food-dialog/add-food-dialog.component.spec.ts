@@ -38,7 +38,7 @@ describe('AddFoodDialogComponent', () => {
   it('should search result is reset before a new search', () => {
     // Arrange
     component.searchResult = [new Food()];
-    const foodService = TestBed.get(FoodService);
+    const foodService = TestBed.inject(FoodService);
     const food = new Food();
     food.description = 'Peach';
 
