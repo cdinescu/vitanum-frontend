@@ -12,16 +12,20 @@ export class AskOracleServiceService {
   private baseUrl = 'http://192.168.0.144:8082/top-richest-foods';
 
   nutrientHolder: NutrientHolder;
-  private nutrientEndPoints: NutrientEntity[];
+  private nutrientEntities: NutrientEntity[];
 
   constructor(private httpClient: HttpClient) {
     this.nutrientHolder = new NutrientHolder();
-    this.nutrientEndPoints = this.nutrientHolder.loadNutrientEntiries();
+    this.nutrientEntities = this.nutrientHolder.loadNutrientEntiries();
   }
 
   getNutrientNames(): string[] {
-    const nutrientNames = this.nutrientEndPoints.map(nutrienEntity => nutrienEntity.getDisplayName());
+    const nutrientNames = this.nutrientEntities.map(nutrienEntity => nutrienEntity.getDisplayName());
     return Array.from(nutrientNames);
+  }
+
+  getNutrientEntities(): NutrientEntity[] {
+    return this.nutrientEntities;
   }
 
   sendRequest(nutrientName: string, resultCount: number): Observable<HttpResponse<Food[]>> {
@@ -36,7 +40,7 @@ export class AskOracleServiceService {
   }
 
   private getNutrientEndPointByName(nutrientName: string): string {
-    return this.nutrientEndPoints.find(entity => nutrientName === entity.getDisplayName()).getInternalName();
+    return this.nutrientEntities.find(entity => nutrientName === entity.getDisplayName()).getInternalName();
   }
 }
 

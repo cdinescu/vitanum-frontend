@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReportComponent } from './report.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ReportComponent', () => {
   let component: ReportComponent;
@@ -8,6 +9,7 @@ describe('ReportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ ReportComponent ]
     })
     .compileComponents();

@@ -7,7 +7,12 @@
       </tr>
     </thead>
     <tbody>
-
+    <!-- loop over the collection of nutrient entities -->
+    <tr *ngFor="let tempNutrient of nutrientList">
+      <th scope="row">{{ tempNutrient.getDisplayName() }}</th>
+      <th scope="row">{{ tempNutrient.getUnit().from }}</th>
+      <th scope="row"> 250 </th>
+    </tr>
   
     </tbody>
   </table>
