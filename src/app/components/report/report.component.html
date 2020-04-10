@@ -9,8 +9,8 @@
     <tbody>
     <!-- loop over the collection of nutrient entities -->
     <tr *ngFor="let tempNutrient of nutrientList">
-      <th scope="row">{{ tempNutrient.getDisplayName() }}</th>
-      <th scope="row">{{ tempNutrient.getUnit().from }}</th>
+      <th scope="row">{{ tempNutrient.nutrient.name }}</th>
+      <th scope="row">{{ tempNutrient.nutrient.unitName }}</th>
       <th scope="row"> {{ tempNutrient.amount }} </th>
     </tr>
   

@@ -7,6 +7,9 @@ import { FoodService } from 'src/app/services/food.service';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { Food } from 'src/app/common/food';
+import { FoodNutrient } from 'src/app/common/food-nutrient';
+import { Observable, forkJoin } from 'rxjs';
+import { Nutrient } from 'src/app/common/nutrient';
 
 @Component({
   selector: 'app-report',
@@ -14,7 +17,7 @@ import { Food } from 'src/app/common/food';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
-  nutrientList: NutrientEntity[];
+  nutrientList: FoodNutrient[] = [];
 
   // How to refactor this mess?
   constructor(private askOracleService: AskOracleServiceService,
@@ -23,7 +26,7 @@ export class ReportComponent implements OnInit {
     private foodService: FoodService) { }
 
   ngOnInit(): void {
-    this.nutrientList = this.askOracleService.getNutrientEntities();
+    //this.nutrientList = this.askOracleService.getNutrientEntities();
 
     this.diaryService.getDiaryEntries(this.calendarService.currentlySelectedDate)
       .subscribe(data => {
@@ -34,17 +37,41 @@ export class ReportComponent implements OnInit {
   collectNutrientsFromSourceDiary(diaryEntries: DiaryEntry[]) {
     console.log(`Report for date: ${this.calendarService.currentlySelectedDate}`);
 
+    let observableList: Observable<FoodNutrient[]>[] = [];
     diaryEntries.forEach(diaryEntry => {
       console.log(`Entry: ${diaryEntry.description}`);
       const food = this.getFoodFromEntry(diaryEntry);
 
       // Schimbare in back-end!
       console.log('>>> : ' + diaryEntry.fdcId);
-
-      this.foodService.getNutrientReport(food).subscribe(data => {
-        console.log(`Nutri for ${food.description}: ${data}`);
-      });
+      observableList.push(this.foodService.getNutrientReport(food));
     });
+
+    forkJoin(observableList).subscribe(results => {
+      results.forEach(nutrientList => {
+        nutrientList.forEach(element => {
+          console.log(element.nutrient);
+
+          this.increaseAmountFor(element);
+        });
+
+      })
+    });
+  }
+
+  increaseAmountFor(nutrient: FoodNutrient) {
+    if (this.nutrientList.length == 0) {
+      this.nutrientList.push(nutrient);
+      return;
+    }
+
+    //const foundNutrient = this.nutrientList.find(element => element.nutrient.name === nutrient.nutrient.name);
+
+    //if (foundNutrient == null) {
+      this.nutrientList.push(nutrient);
+    //} else {
+     // foundNutrient.nutrient.number += nutrient.nutrient.number;
+   // }
   }
 
 
