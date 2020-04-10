@@ -11,7 +11,7 @@
     <tr *ngFor="let tempNutrient of nutrientList">
       <th scope="row">{{ tempNutrient.getDisplayName() }}</th>
       <th scope="row">{{ tempNutrient.getUnit().from }}</th>
-      <th scope="row"> 250 </th>
+      <th scope="row"> {{ tempNutrient.amount }} </th>
     </tr>
   
     </tbody>

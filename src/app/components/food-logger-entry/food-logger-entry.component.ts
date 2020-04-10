@@ -45,6 +45,9 @@ export class FoodLoggerEntryComponent implements OnInit {
     diaryEntry.date = DateUtils.formatDateInISOFormat(this.logEntryDate);
     diaryEntry.amount = this.servingsCount;
     diaryEntry.unit = this.selectedMesurement;
+    diaryEntry.fdcId = this.selectedFood.fdcId;
+
+    console.log('Am adaugat: ' +  diaryEntry.fdcId);
 
     this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
       // notify diary component to send a new GET request

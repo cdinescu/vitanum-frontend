@@ -4,6 +4,7 @@ export class NutrientEntity {
     private displayName: string;
     private internalName: string;
     private unit: ConversionUnit;
+    amount = 0.0;
 
     constructor(displayName: string, internalName: string, unit: ConversionUnit) {
         this.displayName = displayName;

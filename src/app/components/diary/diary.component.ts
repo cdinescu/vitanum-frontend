@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { DiaryServiceService } from '../../services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';

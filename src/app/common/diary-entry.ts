@@ -1,3 +1,5 @@
+import { Food } from './food';
+
 export class DiaryEntry {
     id: number;
     date: string;
@@ -5,5 +7,6 @@ export class DiaryEntry {
     amount: number;
     unit: string;
     calories: number;
+    fdcId: string;
 
 }
