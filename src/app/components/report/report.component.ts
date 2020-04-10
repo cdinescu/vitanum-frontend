@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AskOracleServiceService } from 'src/app/services/ask-oracle-service.service';
-import { NutrientEntity } from 'src/app/common/nutrient-entity';
-import { ActivatedRoute } from '@angular/router';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { FoodService } from 'src/app/services/food.service';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
@@ -9,7 +7,6 @@ import { DiaryEntry } from 'src/app/common/diary-entry';
 import { Food } from 'src/app/common/food';
 import { FoodNutrient } from 'src/app/common/food-nutrient';
 import { Observable, forkJoin } from 'rxjs';
-import { Nutrient } from 'src/app/common/nutrient';
 
 @Component({
   selector: 'app-report',
@@ -26,8 +23,6 @@ export class ReportComponent implements OnInit {
     private foodService: FoodService) { }
 
   ngOnInit(): void {
-    //this.nutrientList = this.askOracleService.getNutrientEntities();
-
     this.diaryService.getDiaryEntries(this.calendarService.currentlySelectedDate)
       .subscribe(data => {
         this.collectNutrientsFromSourceDiary(data);
@@ -39,7 +34,6 @@ export class ReportComponent implements OnInit {
 
     let observableList: Observable<FoodNutrient[]>[] = [];
     diaryEntries.forEach(diaryEntry => {
-      console.log(`Entry: ${diaryEntry.description}`);
       const food = this.getFoodFromEntry(diaryEntry);
 
       // Schimbare in back-end!
@@ -60,20 +54,14 @@ export class ReportComponent implements OnInit {
   }
 
   increaseAmountFor(nutrient: FoodNutrient) {
-    if (this.nutrientList.length == 0) {
+    const foundNutrient = this.nutrientList.find(element => element.nutrient.name === nutrient.nutrient.name);
+
+    if (foundNutrient == null) {
       this.nutrientList.push(nutrient);
-      return;
+    } else {
+      foundNutrient.amount += nutrient.amount;
     }
-
-    //const foundNutrient = this.nutrientList.find(element => element.nutrient.name === nutrient.nutrient.name);
-
-    //if (foundNutrient == null) {
-      this.nutrientList.push(nutrient);
-    //} else {
-     // foundNutrient.nutrient.number += nutrient.nutrient.number;
-   // }
   }
-
 
   private getFoodFromEntry(diaryEntry: DiaryEntry) {
     const food = new Food();
