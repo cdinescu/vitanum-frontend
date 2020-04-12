@@ -32,7 +32,7 @@ export class ReportComponent implements OnInit {
   collectNutrientsFromSourceDiary(diaryEntries: DiaryEntry[]) {
     console.log(`Report for date: ${this.calendarService.currentlySelectedDate}`);
 
-    let observableList: Observable<FoodNutrient[]>[] = [];
+    const observableList: Observable<FoodNutrient[]>[] = [];
     diaryEntries.forEach(diaryEntry => {
       const food = this.getFoodFromEntry(diaryEntry);
 
@@ -49,7 +49,7 @@ export class ReportComponent implements OnInit {
           this.increaseAmountFor(element);
         });
 
-      })
+      });
     });
   }
 
