@@ -4,21 +4,26 @@ import { DiaryComponent } from './diary.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialModule } from 'src/app/material.module';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
-import { of, empty } from 'rxjs';
-import { by } from 'protractor';
+import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { CalendarService } from 'src/app/services/calendar.service';
 
 describe('DiaryComponent', () => {
   let component: DiaryComponent;
   let fixture: ComponentFixture<DiaryComponent>;
+  const dialogMock = {
+    close: () => { }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, MatIconModule, MaterialModule, MatDialogModule],
+      providers: [
+        { provide: MatDialogRef, useValue: dialogMock },
+        { provide: MAT_DIALOG_DATA, useValue: [] }
+      ],
       declarations: [DiaryComponent]
     })
       .compileComponents();
@@ -30,27 +35,6 @@ describe('DiaryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should be able to load service data on init', () => {
-    // Arrange
-    const diaryService: DiaryServiceService = TestBed.inject(DiaryServiceService);
-    const calendarService: CalendarService = TestBed.inject(CalendarService);
-
-    const diaryEntry = new DiaryEntry();
-    const diaryEntries: DiaryEntry[] = [diaryEntry];
-    calendarService.selectedDate.next(new Date());
-    spyOn(diaryService, 'getDiaryEntries').and.returnValue(of(diaryEntries));
-
-    // Act
-    fixture.detectChanges();
-    component.ngOnInit();
-
-    // Assert
-    expect(component.diaryEntries).toContain(diaryEntry);
-  });
 
   it('should be able to list entries', () => {
     // Arrange
@@ -87,6 +71,7 @@ describe('DiaryComponent', () => {
     const diaryEntries: DiaryEntry[] = [diaryEntry];
     spyOn(diaryService, 'getDiaryEntries').and.returnValue(of(diaryEntries));
     spyOn(diaryService, 'deleteDiaryEntry').and.returnValue(of());
+    fixture.detectChanges();
 
     // Act
     component.deleteEntry(1);

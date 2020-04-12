@@ -24,36 +24,29 @@ export class ReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.diaryService.getDiaryEntries(this.calendarService.currentlySelectedDate)
-      .subscribe(data => {
-        this.collectNutrientsFromSourceDiary(data);
-      });
+      .subscribe((data) => this.collectNutrientsFromSourceDiary(data));
   }
 
-  collectNutrientsFromSourceDiary(diaryEntries: DiaryEntry[]) {
+  private collectNutrientsFromSourceDiary(diaryEntries: DiaryEntry[]) {
     console.log(`Report for date: ${this.calendarService.currentlySelectedDate}`);
 
     const observableList: Observable<FoodNutrient[]>[] = [];
     diaryEntries.forEach(diaryEntry => {
       const food = this.getFoodFromEntry(diaryEntry);
-
-      // Schimbare in back-end!
-      console.log('>>> : ' + diaryEntry.fdcId);
       observableList.push(this.foodService.getNutrientReport(food));
     });
 
-    forkJoin(observableList).subscribe(results => {
-      results.forEach(nutrientList => {
-        nutrientList.forEach(element => {
-          console.log(element.nutrient);
+    this.forkObservableAndJoinResults(observableList);
+  }
 
-          this.increaseAmountFor(element);
-        });
-
-      });
+  private forkObservableAndJoinResults(observableList: Observable<FoodNutrient[]>[]) {
+    forkJoin(observableList).subscribe(foodNutrients => {
+      foodNutrients.forEach(nutrientList => nutrientList.forEach(element => this.increaseAmountFor(element))
+      );
     });
   }
 
-  increaseAmountFor(nutrient: FoodNutrient) {
+  private increaseAmountFor(nutrient: FoodNutrient) {
     const foundNutrient = this.nutrientList.find(element => element.nutrient.name === nutrient.nutrient.name);
 
     if (foundNutrient == null) {
@@ -68,6 +61,7 @@ export class ReportComponent implements OnInit {
     food.description = diaryEntry.description;
     food.measure = diaryEntry.unit;
     food.fdcId = diaryEntry.fdcId;
+
     return food;
   }
 }

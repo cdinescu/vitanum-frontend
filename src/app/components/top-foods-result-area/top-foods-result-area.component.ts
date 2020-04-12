@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { AskOracleServiceService } from 'src/app/services/ask-oracle-service.service';
 import { Food } from 'src/app/common/food';
 import { AskOracleSharedDataService } from 'src/app/services/ask-oracle-shared-data.service';
@@ -17,8 +17,9 @@ export class TopFoodsResultAreaComponent implements OnInit {
   topFoods: Food[] = [];
 
   constructor(private askOracleServiceService: AskOracleServiceService,
-              private askOracleSharedDataService: AskOracleSharedDataService,
-              private dialog: MatDialog) { }
+    private askOracleSharedDataService: AskOracleSharedDataService,
+    private dialog: MatDialog,
+    private ngZone: NgZone) { }
 
   ngOnInit(): void {
     this.askOracleSharedDataService.sharedQuery.subscribe(query => {
@@ -54,8 +55,12 @@ export class TopFoodsResultAreaComponent implements OnInit {
       title: 'Add Food to Diary'
     };
 
-    const dialogRef = this.dialog.open(AddFoodFromTopFoodsComponent, dialogConfig);
-    dialogRef.componentInstance.foodSelectedFromTop = food;
+    let dialogRef: MatDialogRef<AddFoodFromTopFoodsComponent, any>;
+    this.ngZone.run(() => {
+      dialogRef = this.dialog.open(AddFoodFromTopFoodsComponent, dialogConfig);
+      dialogRef.componentInstance.foodSelectedFromTop = food;
+
+    });
 
     return dialogRef;
   }

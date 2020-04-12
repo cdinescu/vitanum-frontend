@@ -4,16 +4,23 @@ import { TopFoodsResultAreaComponent } from './top-foods-result-area.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialModule } from 'src/app/material.module';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Food } from 'src/app/common/food';
 
 describe('TopFoodsResultAreaComponent', () => {
   let component: TopFoodsResultAreaComponent;
   let fixture: ComponentFixture<TopFoodsResultAreaComponent>;
+  const dialogMock = {
+    close: () => { }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, MatIconModule, MaterialModule, MatDialogModule],
+      providers: [
+        { provide: MatDialogRef, useValue: dialogMock  },
+        { provide: MAT_DIALOG_DATA, useValue: [] } 
+      ],
       declarations: [TopFoodsResultAreaComponent]
     })
       .compileComponents();
@@ -35,13 +42,14 @@ describe('TopFoodsResultAreaComponent', () => {
     food.description = 'New food description';
 
     // Act
-    // const dialogRef = component.addFoodToDiary(food);
+    const dialogRef = component.addFoodToDiary(food);
 
     // Assert
-   // expect(dialogRef).toBeDefined();
-   // expect(dialogRef.componentInstance.foodSelectedFromTop).toEqual(food);
+    expect(dialogRef).toBeDefined();
+    expect(dialogRef.componentInstance.foodSelectedFromTop).toEqual(food);
 
     // Close the dialog
-   // dialogRef.close();
+    dialogRef.close();
   });
+
 });

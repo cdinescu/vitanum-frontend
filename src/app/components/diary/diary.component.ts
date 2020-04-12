@@ -1,7 +1,7 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, NgZone } from '@angular/core';
 import { DiaryServiceService } from '../../services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { CalendarService } from 'src/app/services/calendar.service';
 
@@ -15,7 +15,10 @@ export class DiaryComponent implements OnInit {
 
   diaryEntries: DiaryEntry[] = [];
 
-  constructor(private diaryService: DiaryServiceService, private calendarService: CalendarService, private dialog: MatDialog) {
+  constructor(private diaryService: DiaryServiceService,
+    private calendarService: CalendarService,
+    private dialog: MatDialog,
+    private ngZone: NgZone) {
   }
 
   ngOnInit(): void {
@@ -45,7 +48,7 @@ export class DiaryComponent implements OnInit {
     entry[property] = event.target.textContent;
   }
 
-  openDialog() {
+  openDialog(): MatDialogRef<AddFoodDialogComponent, any> {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.height = '50%';
@@ -58,7 +61,13 @@ export class DiaryComponent implements OnInit {
       title: 'Add Food to Diary'
     };
 
-    this.dialog.open(AddFoodDialogComponent, dialogConfig);
+    let dialogRef: MatDialogRef<AddFoodDialogComponent, any>;
+    this.ngZone.run(() => {
+      dialogRef = this.dialog.open(AddFoodDialogComponent, dialogConfig);
+
+    });
+
+    return dialogRef;
   }
 
 }

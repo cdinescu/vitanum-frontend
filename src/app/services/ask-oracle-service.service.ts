@@ -24,10 +24,6 @@ export class AskOracleServiceService {
     return Array.from(nutrientNames);
   }
 
-  getNutrientEntities(): NutrientEntity[] {
-    return this.nutrientEntities;
-  }
-
   sendRequest(nutrientName: string, resultCount: number): Observable<HttpResponse<Food[]>> {
     if (nutrientName == null || resultCount == null) {
       return EMPTY;
