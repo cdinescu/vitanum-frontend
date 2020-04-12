@@ -23,7 +23,8 @@ export class ReportComponent implements OnInit {
     private foodService: FoodService) { }
 
   ngOnInit(): void {
-    this.diaryService.getDiaryEntries(this.calendarService.currentlySelectedDate)
+    this.diaryService
+      .getDiaryEntries(this.calendarService.currentlySelectedDate)
       .subscribe((data) => this.collectNutrientsFromSourceDiary(data));
   }
 
