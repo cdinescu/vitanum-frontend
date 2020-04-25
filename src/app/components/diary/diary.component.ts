@@ -12,6 +12,7 @@ import { CalendarService } from 'src/app/services/calendar.service';
 })
 export class DiaryComponent implements OnInit {
   diaryTargetDate: Date;
+  username = "cristina"; // this will be taken from the claim name (OAuth2)
 
   diaryEntries: DiaryEntry[] = [];
 
@@ -33,7 +34,7 @@ export class DiaryComponent implements OnInit {
   }
 
   listDiaryEntries() {
-    this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => this.diaryEntries = data);
+    this.diaryService.getDiaryEntries(this.diaryTargetDate, this.username).subscribe(data => this.diaryEntries = data);
   }
 
   updateEntry(entry: DiaryEntry) {

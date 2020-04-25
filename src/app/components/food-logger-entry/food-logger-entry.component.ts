@@ -46,6 +46,7 @@ export class FoodLoggerEntryComponent implements OnInit {
     diaryEntry.amount = this.servingsCount;
     diaryEntry.unit = this.selectedMesurement;
     diaryEntry.fdcId = this.selectedFood.fdcId;
+    diaryEntry.username = 'cristina';
 
     console.log('Am adaugat: ' +  diaryEntry.fdcId);
 

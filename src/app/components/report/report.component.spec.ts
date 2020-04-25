@@ -63,6 +63,7 @@ describe('ReportComponent', () => {
     diaryEntry1.calories = 50;
     diaryEntry1.unit = 'g';
     diaryEntry1.fdcId = '1000';
+    diaryEntry1.username = 'cristina';
 
     const diaryEntry2 = new DiaryEntry();
     diaryEntry2.description = 'Cheese';

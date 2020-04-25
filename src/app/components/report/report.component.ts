@@ -15,6 +15,7 @@ import { Observable, forkJoin } from 'rxjs';
 })
 export class ReportComponent implements OnInit {
   nutrientList: FoodNutrient[] = [];
+  username = "cristina"; // this will be removed after integrating OAuth2
 
   // How to refactor this mess?
   constructor(private askOracleService: AskOracleServiceService,
@@ -24,7 +25,7 @@ export class ReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.diaryService
-      .getDiaryEntries(this.calendarService.currentlySelectedDate)
+      .getDiaryEntries(this.calendarService.currentlySelectedDate, this.username)
       .subscribe((data) => this.collectNutrientsFromSourceDiary(data));
   }
 

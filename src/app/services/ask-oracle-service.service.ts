@@ -4,12 +4,13 @@ import { EMPTY, Observable } from 'rxjs';
 import { Food } from '../common/food';
 import { NutrientEntity } from '../common/nutrient-entity';
 import { NutrientHolder } from '../common/nutrient-holder';
+import { UrlConstants } from '../common/constants/url-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AskOracleServiceService {
-  private baseUrl = 'http://192.168.0.144:8082/top-richest-foods';
+  private baseUrl = UrlConstants.ASK_ORACLE_SERVICE_BASE_URL;
 
   nutrientHolder: NutrientHolder;
   private nutrientEntities: NutrientEntity[];

@@ -20,7 +20,7 @@ describe('DiaryServiceService', () => {
   });
 
   it('should be able to get diary entries', () => {
-    expect(service.getDiaryEntries(new Date())).toBeInstanceOf(Observable);
+    expect(service.getDiaryEntries(new Date(), 'cristina')).toBeInstanceOf(Observable);
   });
 
   it('should be able to create a new diary entry', () => {

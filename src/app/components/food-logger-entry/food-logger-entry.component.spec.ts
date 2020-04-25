@@ -74,6 +74,7 @@ function createDiaryEntry() {
   diaryEntry.amount = 100;
   diaryEntry.calories = 150;
   diaryEntry.unit = 'g';
+  diaryEntry.username = 'cristina'; // OAuth2
 
   return diaryEntry;
 }
