@@ -12,7 +12,7 @@ import { CalendarService } from 'src/app/services/calendar.service';
 })
 export class DiaryComponent implements OnInit {
   diaryTargetDate: Date;
-  username = "cristina"; // this will be taken from the claim name (OAuth2)
+  username = 'cristina'; // this will be taken from the claim name (OAuth2)
 
   diaryEntries: DiaryEntry[] = [];
 
