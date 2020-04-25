@@ -15,7 +15,7 @@ import { Observable, forkJoin } from 'rxjs';
 })
 export class ReportComponent implements OnInit {
   nutrientList: FoodNutrient[] = [];
-  username = "cristina"; // this will be removed after integrating OAuth2
+  username = 'cristina'; // this will be removed after integrating OAuth2
 
   // How to refactor this mess?
   constructor(private askOracleService: AskOracleServiceService,
@@ -33,18 +33,33 @@ export class ReportComponent implements OnInit {
     console.log(`Report for date: ${this.calendarService.currentlySelectedDate}`);
 
     const observableList: Observable<FoodNutrient[]>[] = [];
+    let totalAmountOfFood = 0.0;
+
     diaryEntries.forEach(diaryEntry => {
       const food = this.getFoodFromEntry(diaryEntry);
       observableList.push(this.foodService.getNutrientReport(food));
+
+      totalAmountOfFood = this.computeTotalAmountInGrams(diaryEntry, totalAmountOfFood);
     });
 
-    this.forkObservableAndJoinResults(observableList);
+    this.forkObservableAndJoinResults(observableList, totalAmountOfFood);
   }
 
-  private forkObservableAndJoinResults(observableList: Observable<FoodNutrient[]>[]) {
+  private computeTotalAmountInGrams(diaryEntry: DiaryEntry, totalAmountOfFood: number) {
+    if (diaryEntry.unit == 'g') {
+      totalAmountOfFood += diaryEntry.amount;
+    }
+    else { // 'mg'
+      totalAmountOfFood += diaryEntry.amount / 1000;
+    }
+    return totalAmountOfFood;
+  }
+
+  private forkObservableAndJoinResults(observableList: Observable<FoodNutrient[]>[], totalAmountOfFood: number) {
     forkJoin(observableList).subscribe(foodNutrients => {
-      foodNutrients.forEach(nutrientList => nutrientList.forEach(element => this.increaseAmountFor(element))
-      );
+      foodNutrients.forEach(nutrientList => nutrientList.forEach(element => this.increaseAmountFor(element)));
+      // amount of nutrient per 100g of food
+      foodNutrients.forEach(nutrientList => nutrientList.forEach(element => element.amount *= totalAmountOfFood / 100));
     });
   }
 

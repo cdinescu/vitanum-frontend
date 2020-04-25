@@ -94,7 +94,7 @@ describe('ReportComponent', () => {
     // Arrange
     const diaryEntry1 = new DiaryEntry();
     diaryEntry1.description = 'Tomato';
-    diaryEntry1.amount = 100;
+    diaryEntry1.amount = 200;
     diaryEntry1.calories = 50;
     diaryEntry1.unit = 'g';
     diaryEntry1.fdcId = '1000';
@@ -102,7 +102,7 @@ describe('ReportComponent', () => {
     const diaryEntry2 = new DiaryEntry();
     diaryEntry2.description = 'Cheese';
     diaryEntry2.amount = 50;
-    diaryEntry2.calories = 100;
+    diaryEntry2.calories = 200;
     diaryEntry1.unit = 'g';
     diaryEntry2.fdcId = '1001';
 
@@ -137,10 +137,10 @@ describe('ReportComponent', () => {
     // Assert
     expect(component.nutrientList).toContain(foodNutrient1);
     const nutrinet1_report = component.nutrientList.find(element => element == foodNutrient1);
-    expect(nutrinet1_report.amount).toBe(2); // has been added twice
+    expect(nutrinet1_report.amount).toEqual(8.004000500000002); // has been added twice
 
     expect(component.nutrientList).toContain(foodNutrient2);
     const nutrinet2_report = component.nutrientList.find(element => element == foodNutrient2);
-    expect(nutrinet2_report.amount).toBe(10); // has been added twice
+    expect(nutrinet2_report.amount).toEqual(40.02000250000001); // has been added twice
   });
 });
