@@ -42,7 +42,7 @@ describe('FoodLoggerEntryComponent', () => {
   });
 
   it('should have available measurements', () => {
-    expect(component.availableFoodMesurements).toEqual(['g', 'mg', 'l', 'ml']);
+    expect(component.availableFoodMesurements).toEqual(['g', 'mg']);
   });
 
   it('should have a selected measure', () => {

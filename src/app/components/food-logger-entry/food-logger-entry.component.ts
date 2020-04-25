@@ -22,7 +22,7 @@ export class FoodLoggerEntryComponent implements OnInit {
 
   servingsCount = 1; // default
 
-  availableFoodMesurements = ['g', 'mg', 'l', 'ml'];
+  availableFoodMesurements = ['g', 'mg'];
   selectedMesurement: string;
 
   constructor(private calendarService: CalendarService, private diaryService: DiaryServiceService) {
