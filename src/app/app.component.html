@@ -14,9 +14,16 @@
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<app-tabbed-menu></app-tabbed-menu>
+						<div style="float:right;">
+							<button mat-raised-button class="light-button" *ngIf="!isAuthenticated"
+								(click)="oktaAuth.loginRedirect()">Login</button>
+							<button mat-raised-button class="light-button" *ngIf="isAuthenticated"
+								(click)="oktaAuth.logout()">Logout</button>
+						</div>
 					</div>
 				</div>
 			</div>
+
 		</header>
 		<!-- END HEADER DESKTOP-->
 

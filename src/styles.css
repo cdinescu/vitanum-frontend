@@ -1046,3 +1046,12 @@ footer ul li{
         padding:8px 0
     }
 }
+
+.light-button {
+    font-weight: bold;
+    color: white;
+    height: 40px; 
+    width: 100px;
+    font-size: 110%;
+    border: 3px solid white !important;
+}

@@ -23,6 +23,7 @@ import { AddFoodFromTopFoodsComponent } from './components/add-food-from-top-foo
 import { ReportComponent } from './components/report/report.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { AuthRoutingModule } from './auth-routing.module';
 
 
 const routes: Routes = [
@@ -57,7 +58,8 @@ const routes: Routes = [
     MatIconModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthRoutingModule
   ],
   providers: [HttpClientModule, DiaryServiceService, AskOracleSharedDataService, FoodService],
   bootstrap: [AppComponent]
