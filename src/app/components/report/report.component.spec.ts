@@ -57,9 +57,9 @@ describe('ReportComponent', () => {
     const date = new Date();
     calendarService.currentlySelectedDate = date;
 
-    spyOn(diarySevice, 'getDiaryEntries').and.callFake(date => {
+    spyOn(diarySevice, 'getDiaryEntries').and.callFake((date) => {
       return empty();
-    })
+    });
 
     // Act
     fixture.detectChanges();
@@ -90,11 +90,11 @@ describe('ReportComponent', () => {
 
     spyOn(diarySevice, 'getDiaryEntries').and.callFake(date => {
       return of([diaryEntry1, diaryEntry2]);
-    })
+    });
 
     spyOn(foodService, 'getNutrientReport').and.callFake(any => {
       return empty();
-    })
+    });
 
     // Act
     fixture.detectChanges();
@@ -121,14 +121,14 @@ describe('ReportComponent', () => {
 
     const foodNutrient1 = new FoodNutrient();
     foodNutrient1.amount = 1;
-    let nutrient1 = new Nutrient();
+    const nutrient1 = new Nutrient();
     nutrient1.name = 'Iron';
     nutrient1.unitName = 'mg';
     foodNutrient1.nutrient = nutrient1;
 
     const foodNutrient2 = new FoodNutrient();
     foodNutrient2.amount = 5;
-    let nutrient2 = new Nutrient();
+    const nutrient2 = new Nutrient();
     nutrient2.name = 'Vitamin C';
     nutrient2.unitName = 'mg';
     foodNutrient2.nutrient = nutrient2;
@@ -138,22 +138,22 @@ describe('ReportComponent', () => {
 
     spyOn(diarySevice, 'getDiaryEntries').and.callFake(date => {
       return of([diaryEntry1, diaryEntry2]);
-    })
+    });
 
     spyOn(foodService, 'getNutrientReport').and.callFake(any => {
       return of([foodNutrient1, foodNutrient2]);
-    })
+    });
 
     // Act
     fixture.detectChanges();
 
     // Assert
     expect(component.nutrientList).toContain(foodNutrient1);
-    const nutrinet1_report = component.nutrientList.find(element => element == foodNutrient1);
-    expect(nutrinet1_report.amount).toEqual(8.004000500000002); // has been added twice
+    const nutrientReport1 = component.nutrientList.find(element => element === foodNutrient1);
+    expect(nutrientReport1.amount).toEqual(8.004000500000002); // has been added twice
 
     expect(component.nutrientList).toContain(foodNutrient2);
-    const nutrinet2_report = component.nutrientList.find(element => element == foodNutrient2);
-    expect(nutrinet2_report.amount).toEqual(40.02000250000001); // has been added twice
+    const nutrientReport2 = component.nutrientList.find(element => element === foodNutrient2);
+    expect(nutrientReport2.amount).toEqual(40.02000250000001); // has been added twice
   });
 });
