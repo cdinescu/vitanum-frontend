@@ -9,8 +9,9 @@ import { DiaryEntry } from 'src/app/common/diary-entry';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
+import { OKTA_CONFIG, OktaAuthModule, OktaAuthService, UserClaims } from '@okta/okta-angular';
 import { OktaConstants } from 'src/app/testing/okta-constants';
+import { MyUserClaim } from 'src/app/testing/my-user-claim';
 
 describe('DiaryComponent', () => {
   let component: DiaryComponent;
@@ -18,6 +19,9 @@ describe('DiaryComponent', () => {
   const dialogMock = {
     close: () => { }
   };
+
+  let oktaAuthService: OktaAuthService;
+  let userClaimsPromise: Promise<UserClaims>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,6 +34,13 @@ describe('DiaryComponent', () => {
       declarations: [DiaryComponent]
     })
       .compileComponents();
+
+      oktaAuthService = TestBed.inject(OktaAuthService);
+      const myClaim = new MyUserClaim();
+      myClaim.preferred_username = 'cristina';
+  
+      userClaimsPromise = new Promise<UserClaims>(uc => myClaim);
+      spyOn(oktaAuthService, 'getUser').and.returnValue(userClaimsPromise);
   }));
 
   beforeEach(() => {

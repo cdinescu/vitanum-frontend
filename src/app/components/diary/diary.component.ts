@@ -34,7 +34,6 @@ export class DiaryComponent implements OnInit {
 
     // the user has successfully authenticated; the diaries can now be fetched
     this.diaryService.oktaAuth.getUser().then((claim) =>{ 
-      console.log('FETCH: after Okta: ' + claim.preferred_username);
       this.listDiaryEntries();
      });
   }
