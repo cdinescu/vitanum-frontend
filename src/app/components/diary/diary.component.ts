@@ -12,29 +12,35 @@ import { CalendarService } from 'src/app/services/calendar.service';
 })
 export class DiaryComponent implements OnInit {
   diaryTargetDate: Date;
-  username = 'cristina'; // this will be taken from the claim name (OAuth2)
 
   diaryEntries: DiaryEntry[] = [];
 
   constructor(private diaryService: DiaryServiceService,
     private calendarService: CalendarService,
     private dialog: MatDialog,
-    private ngZone: NgZone) {
-  }
+    private ngZone: NgZone) { }
 
   ngOnInit(): void {
     this.diaryTargetDate = new Date();
 
+    // change the diary entries if the selected date gas changed
     this.calendarService.selectedDate.subscribe(data => {
       this.diaryTargetDate = data;
       this.listDiaryEntries();
     });
 
+    // is this still necessary?
     this.diaryService.updateDiaryEntryQuery.subscribe(data => this.listDiaryEntries());
+
+    // the user has successfully authenticated; the diaries can now be fetched
+    this.diaryService.oktaAuth.getUser().then((claim) =>{ 
+      console.log('FETCH: after Okta: ' + claim.preferred_username);
+      this.listDiaryEntries();
+     });
   }
 
   listDiaryEntries() {
-    this.diaryService.getDiaryEntries(this.diaryTargetDate, this.username).subscribe(data => this.diaryEntries = data);
+    this.diaryService.getDiaryEntries(this.diaryTargetDate).subscribe(data => this.diaryEntries = data);
   }
 
   updateEntry(entry: DiaryEntry) {

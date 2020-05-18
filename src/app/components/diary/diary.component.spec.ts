@@ -9,6 +9,8 @@ import { DiaryEntry } from 'src/app/common/diary-entry';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
+import { OktaConstants } from 'src/app/testing/okta-constants';
 
 describe('DiaryComponent', () => {
   let component: DiaryComponent;
@@ -19,10 +21,11 @@ describe('DiaryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, MatIconModule, MaterialModule, MatDialogModule],
+      imports: [HttpClientModule, MatIconModule, MaterialModule, MatDialogModule, OktaAuthModule],
       providers: [
         { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MAT_DIALOG_DATA, useValue: [] }
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+        { provide: OKTA_CONFIG, useValue: OktaConstants.OKTA_CONFIG }
       ],
       declarations: [DiaryComponent]
     })

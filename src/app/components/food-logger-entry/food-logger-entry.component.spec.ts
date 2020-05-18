@@ -10,17 +10,31 @@ import { of } from 'rxjs';
 import { Food } from 'src/app/common/food';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
+import { OKTA_CONFIG, OktaAuthModule, OktaAuthService, UserClaims } from '@okta/okta-angular';
+import { OktaConstants } from 'src/app/testing/okta-constants';
+import { MyUserClaim } from 'src/app/testing/my-user-claim';
 
 describe('FoodLoggerEntryComponent', () => {
   let component: FoodLoggerEntryComponent;
   let fixture: ComponentFixture<FoodLoggerEntryComponent>;
 
+  let oktaAuthService: OktaAuthService;
+  let userClaimsPromise: Promise<UserClaims>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, FormsModule, MatIconModule, MaterialModule, MatDialogModule],
-      declarations: [FoodLoggerEntryComponent]
+      imports: [HttpClientModule, FormsModule, MatIconModule, MaterialModule, MatDialogModule, OktaAuthModule],
+      declarations: [FoodLoggerEntryComponent],
+      providers: [{ provide: OKTA_CONFIG, useValue: OktaConstants.OKTA_CONFIG }]
     })
       .compileComponents();
+
+      oktaAuthService = TestBed.inject(OktaAuthService);
+      const myClaim = new MyUserClaim();
+      myClaim.preferred_username = 'cristina';
+  
+      userClaimsPromise = new Promise<UserClaims>(uc => myClaim);
+      spyOn(oktaAuthService, 'getUser').and.returnValue(userClaimsPromise);
   }));
 
   beforeEach(() => {

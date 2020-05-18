@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { DiaryEntry } from '../common/diary-entry';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DateUtils } from '../common/date-utils';
 import { UrlConstants } from '../common/constants/url-constants';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,21 @@ export class DiaryServiceService {
 
   private updateDiaryEntryModelQuery = new BehaviorSubject(true);
   updateDiaryEntryQuery = this.updateDiaryEntryModelQuery.asObservable();
+  currentlyLoggedInUsername: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, public oktaAuth: OktaAuthService) {
+    this.oktaAuth.getUser().then(claims => this.currentlyLoggedInUsername = claims.preferred_username);
+  }
 
-  getDiaryEntries(diaryTargetDate: Date, username: string): Observable<DiaryEntry[]> {
+  getDiaryEntries(diaryTargetDate: Date): Observable<DiaryEntry[]> {
     const formattedDate = DateUtils.formatDateInISOFormat(diaryTargetDate);
-    const thisUrl = `${this.searchUrl}/findByUsernameAndDate?date=${formattedDate}&username=${username}`;
+    const thisUrl = `${this.searchUrl}/findByUsernameAndDate?date=${formattedDate}&username=${this.currentlyLoggedInUsername}`;
 
     return this.httpClient.get<GetResponseDiaryEntries>(thisUrl).pipe(map(response => response._embedded.diaryEntries));
   }
 
   postDiaryEntry(diaryEntry: DiaryEntry): Observable<DiaryEntry> {
+    diaryEntry.username = this.currentlyLoggedInUsername;
     return this.httpClient.post<DiaryEntry>(this.baseUrl, diaryEntry);
   }
 

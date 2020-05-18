@@ -4,13 +4,16 @@ import { DiaryServiceService } from './diary-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DiaryEntry } from '../common/diary-entry';
+import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
+import { OktaConstants } from '../testing/okta-constants';
 
 describe('DiaryServiceService', () => {
   let service: DiaryServiceService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientModule, OktaAuthModule],
+      providers: [{ provide: OKTA_CONFIG, useValue: OktaConstants.OKTA_CONFIG }]
     });
     service = TestBed.inject(DiaryServiceService);
   });
@@ -20,7 +23,7 @@ describe('DiaryServiceService', () => {
   });
 
   it('should be able to get diary entries', () => {
-    expect(service.getDiaryEntries(new Date(), 'cristina')).toBeInstanceOf(Observable);
+    expect(service.getDiaryEntries(new Date())).toBeInstanceOf(Observable);
   });
 
   it('should be able to create a new diary entry', () => {

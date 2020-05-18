@@ -9,10 +9,16 @@ import { empty, of } from 'rxjs';
 import { DiaryEntry } from 'src/app/common/diary-entry';
 import { FoodNutrient } from 'src/app/common/food-nutrient';
 import { Nutrient } from 'src/app/common/nutrient';
+import { OKTA_CONFIG, OktaAuthModule, OktaAuthService, UserClaims } from '@okta/okta-angular';
+import { OktaConstants } from 'src/app/testing/okta-constants';
+import { MyUserClaim } from 'src/app/testing/my-user-claim';
 
 describe('ReportComponent', () => {
   let component: ReportComponent;
   let fixture: ComponentFixture<ReportComponent>;
+
+  let oktaAuthService: OktaAuthService;
+  let userClaimsPromise: Promise<UserClaims>;
 
   let calendarService: CalendarService;
   let diarySevice: DiaryServiceService;
@@ -20,10 +26,17 @@ describe('ReportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      declarations: [ReportComponent]
-    })
-      .compileComponents();
+      imports: [HttpClientModule, OktaAuthModule],
+      declarations: [ReportComponent],
+      providers: [{ provide: OKTA_CONFIG, useValue: OktaConstants.OKTA_CONFIG }]
+    }).compileComponents();
+
+    oktaAuthService = TestBed.inject(OktaAuthService);
+    const myClaim = new MyUserClaim();
+    myClaim.preferred_username = 'cristina';
+
+    userClaimsPromise = new Promise<UserClaims>(uc => myClaim);
+    spyOn(oktaAuthService, 'getUser').and.returnValue(userClaimsPromise);
 
     calendarService = TestBed.inject(CalendarService);
     diarySevice = TestBed.inject(DiaryServiceService);

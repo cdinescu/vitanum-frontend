@@ -25,8 +25,7 @@ export class FoodLoggerEntryComponent implements OnInit {
   availableFoodMesurements = ['g', 'mg'];
   selectedMesurement: string;
 
-  constructor(private calendarService: CalendarService, private diaryService: DiaryServiceService) {
-  }
+  constructor(private calendarService: CalendarService, private diaryService: DiaryServiceService) {}
 
   ngOnInit(): void {
     this.selectedMesurement = this.availableFoodMesurements[0];
@@ -46,9 +45,6 @@ export class FoodLoggerEntryComponent implements OnInit {
     diaryEntry.amount = this.servingsCount;
     diaryEntry.unit = this.selectedMesurement;
     diaryEntry.fdcId = this.selectedFood.fdcId;
-    diaryEntry.username = 'cristina';
-
-    console.log('Am adaugat: ' +  diaryEntry.fdcId);
 
     this.diaryService.postDiaryEntry(diaryEntry).subscribe(data => {
       // notify diary component to send a new GET request

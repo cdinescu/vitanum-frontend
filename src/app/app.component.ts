@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OktaAuthService } from '@okta/okta-angular';
+import { OktaAuthService, UserClaims } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,12 @@ export class AppComponent implements OnInit {
   title = 'vitanum-frontend';
   isAuthenticated: boolean;
 
-  constructor(public oktaAuth: OktaAuthService) {
-  }
+  constructor(public oktaAuth: OktaAuthService) { }
 
   async ngOnInit() {
     this.isAuthenticated = await this.oktaAuth.isAuthenticated();
     this.oktaAuth.$authenticationState.subscribe(
-      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
+      (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
     );
   }
 }
