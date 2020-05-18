@@ -138,11 +138,11 @@ describe('ReportComponent', () => {
 
     spyOn(diarySevice, 'getDiaryEntries').and.callFake(date => {
       return of([diaryEntry1, diaryEntry2]);
-    })
+    });
 
     spyOn(foodService, 'getNutrientReport').and.callFake(any => {
       return of([foodNutrient1, foodNutrient2]);
-    })
+    });
 
     // Act
     fixture.detectChanges();
