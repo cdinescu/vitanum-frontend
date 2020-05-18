@@ -19,7 +19,11 @@ export class DiaryServiceService {
   currentlyLoggedInUsername: string;
 
   constructor(private httpClient: HttpClient, public oktaAuth: OktaAuthService) {
-    this.oktaAuth.getUser().then(claims => this.currentlyLoggedInUsername = claims.preferred_username);
+    this.oktaAuth.getUser().then(claims => {
+      if (claims != null) {
+        this.currentlyLoggedInUsername = claims.preferred_username;
+      }
+    });
   }
 
   getDiaryEntries(diaryTargetDate: Date): Observable<DiaryEntry[]> {
