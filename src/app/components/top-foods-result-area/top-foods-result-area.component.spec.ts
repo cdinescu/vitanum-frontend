@@ -18,8 +18,8 @@ describe('TopFoodsResultAreaComponent', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, MatIconModule, MaterialModule, MatDialogModule],
       providers: [
-        { provide: MatDialogRef, useValue: dialogMock  },
-        { provide: MAT_DIALOG_DATA, useValue: [] } 
+        { provide: MatDialogRef, useValue: dialogMock },
+        { provide: MAT_DIALOG_DATA, useValue: [] }
       ],
       declarations: [TopFoodsResultAreaComponent]
     })

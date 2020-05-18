@@ -27,12 +27,12 @@ describe('FoodLoggerEntryComponent', () => {
     })
       .compileComponents();
 
-      oktaAuthService = TestBed.inject(OktaAuthService);
-      const myClaim = new MyUserClaim();
-      myClaim.preferred_username = 'cristina';
-  
-      userClaimsPromise = new Promise<UserClaims>(uc => myClaim);
-      spyOn(oktaAuthService, 'getUser').and.returnValue(userClaimsPromise);
+    oktaAuthService = TestBed.inject(OktaAuthService);
+    const myClaim = new MyUserClaim();
+    myClaim.preferred_username = 'cristina';
+
+    userClaimsPromise = new Promise<UserClaims>(uc => myClaim);
+    spyOn(oktaAuthService, 'getUser').and.returnValue(userClaimsPromise);
   }));
 
   beforeEach(() => {

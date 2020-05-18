@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { DiaryServiceService } from '../../services/diary-service.service';
 import { DiaryEntry } from 'src/app/common/diary-entry';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../add-food-dialog/add-food-dialog.component';
 import { CalendarService } from 'src/app/services/calendar.service';
 
@@ -33,9 +33,9 @@ export class DiaryComponent implements OnInit {
     this.diaryService.updateDiaryEntryQuery.subscribe(data => this.listDiaryEntries());
 
     // the user has successfully authenticated; the diaries can now be fetched
-    this.diaryService.oktaAuth.getUser().then((claim) =>{ 
+    this.diaryService.oktaAuth.getUser().then((claim) => {
       this.listDiaryEntries();
-     });
+    });
   }
 
   listDiaryEntries() {

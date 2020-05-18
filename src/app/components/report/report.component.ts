@@ -43,10 +43,9 @@ export class ReportComponent implements OnInit {
   }
 
   private computeTotalAmountInGrams(diaryEntry: DiaryEntry, totalAmountOfFood: number) {
-    if (diaryEntry.unit == 'g') {
+    if (diaryEntry.unit === 'g') {
       totalAmountOfFood += diaryEntry.amount;
-    }
-    else { // 'mg'
+    } else { // 'mg'
       totalAmountOfFood += diaryEntry.amount / 1000;
     }
     return totalAmountOfFood;
