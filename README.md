@@ -1,5 +1,7 @@
 # VitanumFrontend
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4e8513b65cfe49f3927a26882d6d1303)](https://app.codacy.com/manual/crina91/vitanum-frontend?utm_source=github.com&utm_medium=referral&utm_content=cdinescu/vitanum-frontend&utm_campaign=Badge_Grade_Dashboard)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
 
 ## Development server
