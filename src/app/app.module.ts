@@ -24,13 +24,14 @@ import { ReportComponent } from './components/report/report.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { OktaAuthGuard } from '@okta/okta-angular';
 
 
 const routes: Routes = [
-  { path: 'diaries/:id', component: DiaryComponent },
-  { path: 'ask-the-oracle', component: TopFoodsResultAreaComponent },
-  { path: 'generate-report', component: ReportComponent},
-  { path: 'diaries', component: DiaryComponent },
+  { path: 'diaries/:id', component: DiaryComponent, canActivate: [OktaAuthGuard] },
+  { path: 'ask-the-oracle', component: TopFoodsResultAreaComponent, canActivate: [OktaAuthGuard] },
+  { path: 'generate-report', component: ReportComponent, canActivate: [OktaAuthGuard] },
+  { path: 'diaries', component: DiaryComponent, canActivate: [OktaAuthGuard] },
   { path: '', redirectTo: '/diaries', pathMatch: 'full' },
   { path: '**', redirectTo: '/diaries', pathMatch: 'full' },
 ];

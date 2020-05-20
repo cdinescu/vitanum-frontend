@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OktaAuthService, UserClaims } from '@okta/okta-angular';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-root',
@@ -18,4 +18,5 @@ export class AppComponent implements OnInit {
       (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
     );
   }
+
 }
