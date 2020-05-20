@@ -2,38 +2,41 @@
     border-bottom: 1px solid #4dd0e1;
     box-shadow: 0 1px 0 0 #4dd0e1;
 }
+
 .active-cyan input[type=text] {
     border-bottom: 1px solid #4dd0e1;
     box-shadow: 0 1px 0 0 #4dd0e1;
 }
 
-.active-cyan .fa, .active-cyan-2 .fa {
+.active-cyan .fa,
+.active-cyan-2 .fa {
     color: #4dd0e1;
 }
 
 .cdk-overlay-pane.add-food-dialog {
     position: relative!important;
-  }
-  .close.mat-button {
+}
+
+.close.mat-button {
     position: absolute;
     top: 0;
     right: 0;
     padding: 5px;
     line-height: 14px;
     min-width: auto;
-  }
+}
 
-  .close {
-    outline:0
-  }
+.close {
+    outline: 0
+}
 
-.table-hover > tbody > tr:hover {
+.table-hover>tbody>tr:hover {
     background-color: #4dd0e1;
 }
 
 .table tr.active td {
-  background-color:#123456 !important;
-  color: white;
+    background-color: #123456 !important;
+    color: white;
 }
 
 tr[click] {
@@ -41,9 +44,9 @@ tr[click] {
 }
 
 table.table.table-condensed {
-  border: 1px solid #4dd0e1;
+    border: 1px solid #4dd0e1;
 }
 
-.table-condensed{
-  font-size: 15px;
+.table-condensed {
+    font-size: 15px;
 }

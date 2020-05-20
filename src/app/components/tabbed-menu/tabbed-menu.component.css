@@ -1,6 +1,6 @@
 nav {
     background-color: #0da8e4;
-  }
+}
 
 .sliding-menu {
     display: block;
@@ -16,10 +16,9 @@ nav {
     outline: none;
     background: none;
     border: 0;
-  }
-   
-   
-  .sliding-menu span {
+}
+
+.sliding-menu span {
     display: block;
     position: absolute;
     top: 44px;
@@ -27,10 +26,10 @@ nav {
     right: 18px;
     height: 8px;
     background: #1a2580;
-  }
-   
-  .sliding-menu span::before,
-  .sliding-menu span::after {
+}
+
+.sliding-menu span::before,
+.sliding-menu span::after {
     display: block;
     position: absolute;
     left: 0;
@@ -38,12 +37,12 @@ nav {
     height: 8px;
     background-color: #1a2580;
     content: "";
-  }
-   
-  .sliding-menu span::before {
+}
+
+.sliding-menu span::before {
     top: -20px;
-  }
-   
-  .sliding-menu span::after {
+}
+
+.sliding-menu span::after {
     bottom: -20px;
-  }
+}
