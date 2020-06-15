@@ -92,7 +92,7 @@ describe('ReportComponent', () => {
       return of([diaryEntry1, diaryEntry2]);
     });
 
-    spyOn(foodService, 'getNutrientReport').and.callFake(any => {
+    spyOn(foodService, 'getNutrientReport').and.callFake(anyValue => {
       return empty();
     });
 

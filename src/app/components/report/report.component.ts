@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AskOracleServiceService } from 'src/app/services/ask-oracle-service.service';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { FoodService } from 'src/app/services/food.service';
 import { DiaryServiceService } from 'src/app/services/diary-service.service';
@@ -16,11 +15,7 @@ import { Observable, forkJoin } from 'rxjs';
 export class ReportComponent implements OnInit {
   nutrientList: FoodNutrient[] = [];
 
-  // How to refactor this mess?
-  constructor(private askOracleService: AskOracleServiceService,
-    private calendarService: CalendarService,
-    private diaryService: DiaryServiceService,
-    private foodService: FoodService) { }
+  constructor(private calendarService: CalendarService, private diaryService: DiaryServiceService, private foodService: FoodService) { }
 
   ngOnInit(): void {
     this.diaryService
