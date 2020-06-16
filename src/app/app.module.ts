@@ -15,7 +15,7 @@ import { AddFoodDialogComponent } from './components/add-food-dialog/add-food-di
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AskOracleSharedDataService } from '../app/services/ask-oracle-shared-data.service';
 import { FoodService } from './services/food.service';
 import { FoodLoggerEntryComponent } from './components/food-logger-entry/food-logger-entry.component';
@@ -25,6 +25,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { OktaAuthGuard } from '@okta/okta-angular';
+import { AddTokenInterceptor } from './http_interceptor/add-token-interceptor';
 
 
 const routes: Routes = [
@@ -62,7 +63,13 @@ const routes: Routes = [
     HttpClientModule,
     AuthRoutingModule
   ],
-  providers: [HttpClientModule, DiaryServiceService, AskOracleSharedDataService, FoodService],
+  providers: [
+    HttpClientModule,
+    DiaryServiceService,
+    AskOracleSharedDataService,
+    FoodService,
+    { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

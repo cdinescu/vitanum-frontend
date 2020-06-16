@@ -1,13 +1,13 @@
 export class MyUserClaim {
     [propName: string]: any;
-    auth_time?: Number;
+    auth_time?: number;
     aud?: string;
     email?: string;
-    email_verified?: Boolean;
-    exp?: Number;
+    email_verified?: boolean;
+    exp?: number;
     family_name?: string;
     given_name?: string;
-    iat?: Number;
+    iat?: number;
     iss?: string;
     jti?: string;
     locale?: string;
@@ -15,7 +15,7 @@ export class MyUserClaim {
     nonce?: string;
     preferred_username?: string;
     sub: string;
-    updated_at?: Number;
-    ver?: Number;
+    updated_at?: number;
+    ver?: number;
     zoneinfo?: string;
 }

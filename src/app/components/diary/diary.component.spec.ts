@@ -41,6 +41,9 @@ describe('DiaryComponent', () => {
 
     userClaimsPromise = new Promise<UserClaims>(uc => myClaim);
     spyOn(oktaAuthService, 'getUser').and.returnValue(userClaimsPromise);
+
+    const authCodePromise = new Promise<string>(anyCode => OktaConstants.AUTH_JWT);
+    spyOn(oktaAuthService, 'getAccessToken').and.returnValue(authCodePromise);
   }));
 
   beforeEach(() => {

@@ -4,4 +4,6 @@ export class OktaConstants {
         clientId: 'fake-client-id',
         redirectUri: 'http://localhost:4200'
     };
+
+    public static AUTH_JWT = 'authjwt';
 }
