@@ -33,9 +33,7 @@ export class DiaryComponent implements OnInit {
     this.diaryService.updateDiaryEntryQuery.subscribe(data => this.listDiaryEntries());
 
     // the user has successfully authenticated; the diaries can now be fetched
-    this.diaryService.oktaAuth.getUser().then((claim) => {
-      this.listDiaryEntries();
-    });
+    this.diaryService.oktaAuth.getUser().then((claim) => this.listDiaryEntries());
   }
 
   listDiaryEntries() {
@@ -67,9 +65,7 @@ export class DiaryComponent implements OnInit {
       title: 'Add Food to Diary'
     };
 
-    this.ngZone.run(() => {
-      this.dialog.open(AddFoodDialogComponent, dialogConfig);
-    });
+    this.ngZone.run(() => this.dialog.open(AddFoodDialogComponent, dialogConfig));
   }
 
 }
