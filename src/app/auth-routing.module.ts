@@ -11,7 +11,11 @@ const oktaConfig = {
   issuer: 'https://dev-961527.okta.com/oauth2/default',
   redirectUri: window.location.origin + '/implicit/callback',
   clientId: '0oacgkra6Irh8GQVM4x6',
-  scopes: ['openid', 'profile']
+  scopes: ['openid', 'profile'],
+  tokenManager: {
+    storage: 'sessionStorage',
+    autoRenew: true
+  }
 };
 
 const routes: Routes = [
