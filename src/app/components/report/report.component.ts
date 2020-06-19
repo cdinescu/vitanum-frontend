@@ -51,6 +51,9 @@ export class ReportComponent implements OnInit {
       foodNutrients.forEach(nutrientList => nutrientList.forEach(element => this.increaseAmountFor(element)));
       // amount of nutrient per 100g of food
       foodNutrients.forEach(nutrientList => nutrientList.forEach(element => element.amount *= totalAmountOfFood / 100));
+
+      // sort the nutrient by name (ascendently)
+      this.nutrientList.sort((a, b) => a.nutrient.name.localeCompare(b.nutrient.name));
     });
   }
 
